@@ -20,18 +20,30 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
+        setAdapter()
+        setViewpager()
+        setTab()
+    }
+
+    fun setAdapter(){
         tabAdapter = TabLayoutAdapter(supportFragmentManager)
         tabAdapter.fragments = listOf(
-            SearchFragment(),
-            SearchUserFragment()
+                SearchFragment(),
+                SearchUserFragment()
         )
+    }
+
+    fun setViewpager(){
         binding.searchResult.apply {
             adapter = tabAdapter
         }
+    }
+
+    fun setTab(){
         binding.searchTab.apply {
             setupWithViewPager(binding.searchResult)
-            getTabAt(0)?.text = "첫 번쨰"
-            getTabAt(1)?.text = "두 번쨰"
+            getTabAt(0)?.text = "첫 번째"
+            getTabAt(1)?.text = "두 번째"
         }
     }
 }
