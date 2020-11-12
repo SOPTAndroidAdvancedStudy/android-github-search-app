@@ -2,8 +2,11 @@ package com.siba.searchmvvmpractice
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.SearchView
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import com.siba.searchmvvmpractice.adapter.TabLayoutAdapter
 import com.siba.searchmvvmpractice.databinding.ActivityMainBinding
 import com.siba.searchmvvmpractice.presentation.SearchFragment
@@ -20,9 +23,31 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
+        binding.viewModel = viewModel
+        setSearchView()
+        setObserver()
         setAdapter()
         setViewpager()
         setTab()
+    }
+
+    fun setSearchView(){
+        binding.searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                binding.viewModel?.userName?.value = query!!
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+        })
+    }
+
+    fun setObserver(){
+        binding.viewModel?.userName?.observe(this, Observer {
+            binding.viewModel?.searchUser()
+        })
     }
 
     fun setAdapter(){

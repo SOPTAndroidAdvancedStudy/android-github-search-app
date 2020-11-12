@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import com.siba.searchmvvmpractice.R
 import com.siba.searchmvvmpractice.databinding.FragmentSearchUserBinding
 import com.siba.searchmvvmpractice.vm.MainViewModel
@@ -21,8 +22,22 @@ class SearchUserFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_search_user,container,false)
+        binding.viewModel = viewModel
+        setObserver()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.lifecycleOwner = viewLifecycleOwner
+        setObserver()
+    }
+
+    fun setObserver(){
+        binding.viewModel?.githubUser?.observe(viewLifecycleOwner, Observer {
+            binding.userName.text = it.name
+            binding.follower.text = it.followers.toString()
+            binding.following.text = it.following.toString()
+        })
     }
 }
