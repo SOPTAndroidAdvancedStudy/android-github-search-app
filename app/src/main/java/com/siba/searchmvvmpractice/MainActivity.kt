@@ -20,6 +20,10 @@ class MainActivity : AppCompatActivity() {
 
     private val viewModel : MainViewModel by viewModels()
 
+    // 기능이 다른 것이니까 viewModel도 하나 더 만들어야지
+    // TODO : New Branch & New ViewModel
+    // TODO : MainViewModel name Refactor
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
@@ -31,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         setTab()
     }
 
+    // TODO : Listener divide
     fun setSearchView(){
         binding.searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
