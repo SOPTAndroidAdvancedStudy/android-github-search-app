@@ -9,8 +9,11 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.siba.searchmvvmpractice.R
+import com.siba.searchmvvmpractice.adapter.UserAdapter
 import com.siba.searchmvvmpractice.databinding.FragmentSearchUserBinding
+import com.siba.searchmvvmpractice.databinding.UserItemBinding
 import com.siba.searchmvvmpractice.vm.SearchUserViewModel
 
 class SearchUserFragment : Fragment() {
@@ -18,6 +21,7 @@ class SearchUserFragment : Fragment() {
     private lateinit var binding : FragmentSearchUserBinding
 
     private val viewModel : SearchUserViewModel by activityViewModels()
+    private lateinit var userAdapter : UserAdapter<UserItemBinding>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +34,16 @@ class SearchUserFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.lifecycleOwner = viewLifecycleOwner
+        userAdapter = UserAdapter()
         setObserver()
+        setAdapter()
+    }
+
+    private fun setAdapter() {
+        binding.userRecyclerView.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = userAdapter
+        }
     }
 
     fun setObserver(){

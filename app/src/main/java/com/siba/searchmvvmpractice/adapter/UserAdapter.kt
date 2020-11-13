@@ -1,23 +1,34 @@
 package com.siba.searchmvvmpractice.adapter
 
+import android.service.autofill.UserData
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
+import com.siba.searchmvvmpractice.BR
+import com.siba.searchmvvmpractice.R
+import com.siba.searchmvvmpractice.data.Items
+import com.siba.searchmvvmpractice.databinding.UserItemBinding
 
-class UserAdapter : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
-    class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class UserAdapter<B : UserItemBinding> : RecyclerView.Adapter<UserAdapter<B>.UserViewHolder<B>>() {
+    var data  = mutableListOf<Items>()
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder<B> =
+            UserViewHolder<B>(LayoutInflater.from(parent.context).inflate(R.layout.user_item,parent,false))
+
+    override fun onBindViewHolder(holder: UserViewHolder<B>, position: Int) {
+        holder.bind(data[position])
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
-        TODO("Not yet implemented")
-    }
+    override fun getItemCount(): Int = data.size
 
-    override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        TODO("Not yet implemented")
-    }
+    inner class UserViewHolder<B : UserItemBinding>(itemView : View) : RecyclerView.ViewHolder(itemView){
+        val binding : B = DataBindingUtil.bind(itemView)!!
 
-    override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        fun bind(item : Items){
+            binding.setVariable(BR.ItemData,item)
+        }
     }
 }
