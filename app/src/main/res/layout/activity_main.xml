@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.siba.searchmvvmpractice.vm.MainViewModel" />
+            type="com.siba.searchmvvmpractice.vm.SearchUserViewModel" />
         <variable
             name="activity"
             type="com.siba.searchmvvmpractice.MainActivity" />
@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/search_tab"

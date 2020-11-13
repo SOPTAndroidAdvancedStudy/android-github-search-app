@@ -1,5 +1,7 @@
 package com.siba.searchmvvmpractice.data
 
+import com.google.gson.annotations.SerializedName
+
 class GithubUserData(
         var login : String,
         var id : String,

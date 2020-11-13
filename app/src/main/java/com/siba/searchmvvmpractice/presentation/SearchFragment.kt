@@ -9,13 +9,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import com.siba.searchmvvmpractice.R
 import com.siba.searchmvvmpractice.databinding.FragmentSearchBinding
-import com.siba.searchmvvmpractice.vm.MainViewModel
+import com.siba.searchmvvmpractice.vm.SearchUserViewModel
 
 class SearchFragment : Fragment() {
 
     private lateinit var binding : FragmentSearchBinding
 
-    private val viewModel : MainViewModel by activityViewModels()
+    private val viewModel : SearchUserViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
