@@ -24,23 +24,11 @@ class SearchUserViewModel : ViewModel(){
     val userName : MutableLiveData<String>
         get() = _userName
 
-    private val _githubUser = MutableLiveData<GithubUserData>()
-    val githubUser : MutableLiveData<GithubUserData>
-        get() = _githubUser
-
     private val _githubAllUser = MutableLiveData<RetrofitData>()
     val githubAllUser : MutableLiveData<RetrofitData>
         get() = _githubAllUser
-    // Repository ViewModel에서 생성
 
-
-    // TODO : How to handle Path Value in repository
     // TODO : Error Exception 처리하기
-    fun searchUser() = viewModelScope.launch {
-        val repo = GithubUserRepository(RetrofitHelper(RetrofitBuilder.retrofitService,_userName.value.toString()))
-        _githubUser.value = repo.getGithubUser()
-    }
-
     fun searchAllUser() = viewModelScope.launch {
         val repo = GithubAllUserRepository(GithubUserSearchHelper(RetrofitBuilder.retrofitService,_userName.value.toString()))
         _githubAllUser.value = repo.getGithubAllUser()

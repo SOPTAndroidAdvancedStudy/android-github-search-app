@@ -5,18 +5,22 @@
     <data>
         <variable
             name="viewModel"
-            type="com.siba.searchmvvmpractice.vm.SearchUserViewModel" />
+            type="com.siba.searchmvvmpractice.vm.SearchOneUserViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/frameLayout2"
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".presentation.SearchUserFragment">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/userRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/oneUser_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -5,11 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
-            name="viewModel"
+            name="searchAllViewModel"
             type="com.siba.searchmvvmpractice.vm.SearchUserViewModel" />
         <variable
-            name="activity"
-            type="com.siba.searchmvvmpractice.MainActivity" />
+            name="searchOneViewModel"
+            type="com.siba.searchmvvmpractice.vm.SearchOneUserViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

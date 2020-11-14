@@ -5,11 +5,11 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import com.google.android.material.tabs.TabLayout
 import com.siba.searchmvvmpractice.adapter.TabLayoutAdapter
 import com.siba.searchmvvmpractice.databinding.ActivityMainBinding
-import com.siba.searchmvvmpractice.presentation.SearchFragment
 import com.siba.searchmvvmpractice.presentation.SearchUserFragment
+import com.siba.searchmvvmpractice.presentation.SearchAllUserFragment
+import com.siba.searchmvvmpractice.vm.SearchOneUserViewModel
 import com.siba.searchmvvmpractice.vm.SearchUserViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -18,15 +18,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var tabAdapter : TabLayoutAdapter
 
     private val viewModel : SearchUserViewModel by viewModels()
-
-    // 기능이 다른 것이니까 viewModel도 하나 더 만들어야지
-    // TODO : New Branch & New ViewModel
-    // TODO : MainViewModel name Refactor
-
+    private val ViewModel : SearchOneUserViewModel by viewModels()
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
-        binding.viewModel = viewModel
+        binding.searchAllViewModel = viewModel
+        binding.searchOneViewModel = ViewModel
         setSearchView()
         setObserver()
         setAdapter()
@@ -37,7 +35,12 @@ class MainActivity : AppCompatActivity() {
     fun setSearchView(){
      binding.searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
-                binding.viewModel?.userName?.value = query!!
+                if(binding.searchTab.selectedTabPosition == 0){
+                    binding.searchAllViewModel?.userName?.value = query!!
+                }
+                if(binding.searchTab.selectedTabPosition == 1){
+                    binding.searchOneViewModel?.userName?.value = query!!
+                }
                 return false
             }
 
@@ -48,17 +51,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun setObserver(){
-        binding.viewModel?.userName?.observe(this, Observer {
-            binding.viewModel?.searchUser()
-            binding.viewModel?.searchAllUser()
+        binding.searchAllViewModel?.userName?.observe(this, Observer {
+            binding.searchAllViewModel?.searchAllUser()
+        })
+        binding.searchOneViewModel?.userName?.observe(this , Observer{
+            binding.searchOneViewModel?.searchUser()
         })
     }
 
     fun setAdapter(){
         tabAdapter = TabLayoutAdapter(supportFragmentManager)
         tabAdapter.fragments = listOf(
-                SearchUserFragment(),
-                SearchFragment()
+                SearchAllUserFragment(),
+                SearchUserFragment()
         )
     }
 
