@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.siba.searchmvvmpractice.R
 import com.siba.searchmvvmpractice.adapter.UserAdapter
+import com.siba.searchmvvmpractice.data.Items
 import com.siba.searchmvvmpractice.databinding.FragmentSearchUserBinding
 import com.siba.searchmvvmpractice.databinding.UserItemBinding
 import com.siba.searchmvvmpractice.vm.SearchUserViewModel
@@ -52,7 +53,8 @@ class SearchUserFragment : Fragment() {
             // One Person Call
         })
         binding.viewModel?.githubAllUser?.observe(viewLifecycleOwner, Observer {
-            Log.i("userFragment",it.items[2].toString())
+            userAdapter.data = it.items as MutableList<Items>
+            userAdapter.notifyDataSetChanged()
         })
     }
 }
