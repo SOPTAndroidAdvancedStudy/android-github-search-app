@@ -9,6 +9,7 @@ buildscript {
         version_material = "1.2.0"
         version_navigation = "2.3.0"
         version_lifecycle = "2.2.0"
+        version_room = "2.2.5"
     }
     repositories {
         google()

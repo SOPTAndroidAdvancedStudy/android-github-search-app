@@ -1,9 +1,7 @@
-package com.siba.searchmvvmpractice.api
+package com.siba.searchmvvmpractice.remote
 
-import com.siba.searchmvvmpractice.data.GithubUserData
-import com.siba.searchmvvmpractice.data.RetrofitData
-import okhttp3.Response
-import retrofit2.Call
+import com.siba.searchmvvmpractice.model.GithubUserData
+import com.siba.searchmvvmpractice.model.RetrofitData
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -15,7 +13,8 @@ interface RetrofitService {
     ) : GithubUserData
 
     @GET("search/users")
-    suspend fun getAllUser(
+    suspend fun getUsers(
             @Query("q") user : String
     ) : RetrofitData
+
 }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="recent_keyword_item"
+            type="com.siba.searchmvvmpractice.model.RecentKeyword" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/recent_keyword_ic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_recent_keyword"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@+id/recent_keyword_ic"
+            app:layout_constraintLeft_toRightOf="@+id/recent_keyword_ic"
+            app:layout_constraintBottom_toBottomOf="@+id/recent_keyword_ic"
+            android:layout_marginLeft="8dp"
+            android:text="hello"
+            android:textSize="12sp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

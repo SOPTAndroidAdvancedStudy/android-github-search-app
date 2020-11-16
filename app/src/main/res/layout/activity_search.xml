@@ -5,35 +5,32 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
-            name="searchAllViewModel"
-            type="com.siba.searchmvvmpractice.vm.SearchUserViewModel" />
-        <variable
-            name="searchOneViewModel"
-            type="com.siba.searchmvvmpractice.vm.SearchOneUserViewModel" />
+            name="searchViewModel"
+            type="com.siba.searchmvvmpractice.ui.viewmodel.SearchViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context=".ui.presentation.activity.SearchActivity">
 
         <androidx.appcompat.widget.SearchView
-            android:id="@+id/search_view"
+            android:id="@+id/searchview_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/search_tab"
+            android:id="@+id/tab_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/search_view" />
+            app:layout_constraintTop_toBottomOf="@+id/searchview_main" />
 
         <androidx.viewpager.widget.ViewPager
-            android:id="@+id/search_result"
+            android:id="@+id/viewpager_main"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/search_tab" />
+            app:layout_constraintTop_toBottomOf="@id/tab_main" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,10 +1,10 @@
-package com.siba.searchmvvmpractice.api
+package com.siba.searchmvvmpractice.remote.api
 
+import com.siba.searchmvvmpractice.remote.RetrofitService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitBuilder {
-
     private val URL = "https://api.github.com"
 
     private fun getRetrofit() : Retrofit {
@@ -15,4 +15,5 @@ object RetrofitBuilder {
     }
 
     val retrofitService : RetrofitService = getRetrofit().create(RetrofitService::class.java)
+
 }

@@ -1,4 +1,4 @@
-package com.siba.searchmvvmpractice.presentation
+package com.siba.searchmvvmpractice.ui.presentation.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,27 +7,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.siba.searchmvvmpractice.R
-import com.siba.searchmvvmpractice.adapter.UserAdapter
-import com.siba.searchmvvmpractice.data.Items
-import com.siba.searchmvvmpractice.databinding.FragmentSearchAllUserBinding
+import com.siba.searchmvvmpractice.ui.adapter.UserAdapter
+import com.siba.searchmvvmpractice.model.Items
+import com.siba.searchmvvmpractice.databinding.FragmentSearchUserBinding
 import com.siba.searchmvvmpractice.databinding.UserItemBinding
-import com.siba.searchmvvmpractice.vm.SearchUserViewModel
+import com.siba.searchmvvmpractice.ui.viewmodel.SearchViewModel
 
-class SearchAllUserFragment : Fragment() {
-    // TODO : Rename it ViewModel name is not match
-    private lateinit var binding : FragmentSearchAllUserBinding
+class SearchUserFragment : Fragment() {
+    private lateinit var binding : FragmentSearchUserBinding
 
-    private val viewModel : SearchUserViewModel by activityViewModels()
+    private val viewModel : SearchViewModel by activityViewModels()
     private lateinit var userAdapter : UserAdapter<UserItemBinding>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_search_all_user,container,false)
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_search_user,container,false)
         binding.viewModel = viewModel
         return binding.root
     }
@@ -43,13 +42,14 @@ class SearchAllUserFragment : Fragment() {
         binding.userRecyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = userAdapter
+            addItemDecoration(DividerItemDecoration(requireContext(),LinearLayoutManager.VERTICAL))
         }
     }
 
     fun setObserver(){
-        binding.viewModel?.githubAllUser?.observe(viewLifecycleOwner, Observer {
+        viewModel.githubUser.observe(viewLifecycleOwner){
             userAdapter.data = it.items as MutableList<Items>
             userAdapter.notifyDataSetChanged()
-        })
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.siba.searchmvvmpractice.data
+package com.siba.searchmvvmpractice.model
 
 data class RetrofitData(
         val total_count : Int,
