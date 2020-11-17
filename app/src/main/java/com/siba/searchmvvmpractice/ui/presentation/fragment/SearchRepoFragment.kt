@@ -28,5 +28,5 @@ class SearchRepoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.lifecycleOwner = viewLifecycleOwner
     }
-
+    
 }

@@ -3,12 +3,16 @@ package com.siba.searchmvvmpractice.ui.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.siba.searchmvvmpractice.local.entity.RecentSearchTerm
 import com.siba.searchmvvmpractice.model.GithubUserData
 import com.siba.searchmvvmpractice.model.RetrofitData
-import com.siba.searchmvvmpractice.repository.MainRepository
+import com.siba.searchmvvmpractice.repository.SearchRepository
 import kotlinx.coroutines.launch
 
-class SearchViewModel : ViewModel(){
+class SearchViewModel(
+        private val repository: SearchRepository
+) : ViewModel(){
+
     private val _userName = MutableLiveData<String>()
     val userName : MutableLiveData<String>
         get() = _userName
@@ -21,10 +25,13 @@ class SearchViewModel : ViewModel(){
     val githubRepo : MutableLiveData<GithubUserData>
         get() = _githubRepo
 
-    val repository = MainRepository()
 
     fun searchUser() = viewModelScope.launch {
         githubUser.value = repository.fetchUser(userName.value.toString())
+    }
+
+    fun saveSearchTerm() = viewModelScope.launch{
+        repository.insertKeyword(RecentSearchTerm(0,userName.value.toString()))
     }
 
 }
