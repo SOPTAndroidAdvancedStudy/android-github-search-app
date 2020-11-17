@@ -5,11 +5,18 @@ import android.os.Bundle
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.siba.searchmvvmpractice.R
 import com.siba.searchmvvmpractice.ui.adapter.ViewPagerAdapter
 import com.siba.searchmvvmpractice.databinding.ActivitySearchBinding
+import com.siba.searchmvvmpractice.databinding.SearchTermItemBinding
 import com.siba.searchmvvmpractice.local.database.SearchTermDatabase
+import com.siba.searchmvvmpractice.local.entity.RecentSearchTerm
+import com.siba.searchmvvmpractice.model.SearchTermData
+import com.siba.searchmvvmpractice.ui.adapter.SearchTermAdapter
 import com.siba.searchmvvmpractice.ui.viewmodel.SearchViewModel
 import com.siba.searchmvvmpractice.utils.Injection
 
@@ -18,18 +25,29 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var binding : ActivitySearchBinding
     private lateinit var viewModel : SearchViewModel
     private lateinit var mDatabase : SearchTermDatabase
-    
+
+    private lateinit var searchTermAdapter : SearchTermAdapter<SearchTermItemBinding>
+
+    // TODO : 검색어 recyclerview dataclass 변경 , Database entity와 동일하게 생성
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_search)
-        initViews()
         initViewModel()
+        initViews()
         setViewPagerAdapter(supportFragmentManager)
         setSearchView(binding.searchviewMain)
-
+        setSearchTermRecyclerView()
         binding.searchViewModel = viewModel
         binding.lifecycleOwner = this
 
+    }
+
+    private fun setSearchTermRecyclerView() {
+        binding.searchTermRecyclerviewMain.apply {
+            adapter = searchTermAdapter
+            layoutManager = LinearLayoutManager(this@SearchActivity)
+            addItemDecoration(DividerItemDecoration(this@SearchActivity, LinearLayoutManager.VERTICAL))
+        }
     }
 
     private fun initViewModel() {
@@ -38,8 +56,8 @@ class SearchActivity : AppCompatActivity() {
 
     private fun initViews() {
         mDatabase = SearchTermDatabase.getInstance(this)
+        searchTermAdapter = SearchTermAdapter()
     }
-
 
     fun setSearchView(searchView: SearchView){
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
@@ -67,4 +85,5 @@ class SearchActivity : AppCompatActivity() {
             getTabAt(1)?.text = "Repository"
         }
     }
+
 }

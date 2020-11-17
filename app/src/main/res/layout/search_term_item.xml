@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="searchTerm"
+            type="com.siba.searchmvvmpractice.model.SearchTermData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ic_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_recent_keyword"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <TextView
+            android:id="@+id/search_term"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{searchTerm.searchTerm}"
+            android:layout_marginLeft="16dp"
+            app:layout_constraintLeft_toRightOf="@+id/ic_item"
+            app:layout_constraintTop_toTopOf="@+id/ic_item"
+            app:layout_constraintBottom_toBottomOf="@+id/ic_item" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
