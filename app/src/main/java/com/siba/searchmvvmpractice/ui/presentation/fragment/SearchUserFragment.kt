@@ -39,7 +39,7 @@ class SearchUserFragment : Fragment() {
     }
 
     private fun setAdapter() {
-        binding.userRecyclerView.apply {
+        binding.searchUserRecyclerview.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = userAdapter
             addItemDecoration(DividerItemDecoration(requireContext(),LinearLayoutManager.VERTICAL))

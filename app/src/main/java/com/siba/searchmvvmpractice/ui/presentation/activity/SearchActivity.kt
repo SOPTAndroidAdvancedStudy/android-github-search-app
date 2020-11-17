@@ -26,6 +26,7 @@ class SearchActivity : AppCompatActivity() {
         initViewModel()
         setViewPagerAdapter(supportFragmentManager)
         setSearchView(binding.searchviewMain)
+
         binding.searchViewModel = viewModel
         binding.lifecycleOwner = this
 
@@ -45,6 +46,7 @@ class SearchActivity : AppCompatActivity() {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 viewModel.userName.value = query!!
                 viewModel.searchUser()
+                viewModel.searchRepo()
                 viewModel.saveSearchTerm()
                 return false
             }

@@ -7,14 +7,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.siba.searchmvvmpractice.R
 import com.siba.searchmvvmpractice.databinding.FragmentSearchRepoBinding
+import com.siba.searchmvvmpractice.databinding.RepoItemBinding
+import com.siba.searchmvvmpractice.model.Items
+import com.siba.searchmvvmpractice.model.ReposItems
+import com.siba.searchmvvmpractice.ui.adapter.RepoAdapter
 import com.siba.searchmvvmpractice.ui.viewmodel.SearchViewModel
 
 class SearchRepoFragment : Fragment() {
     private lateinit var binding : FragmentSearchRepoBinding
 
     private val viewModel : SearchViewModel by activityViewModels()
+    private lateinit var repoAdapter : RepoAdapter<RepoItemBinding>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,6 +34,26 @@ class SearchRepoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.lifecycleOwner = viewLifecycleOwner
+        repoAdapter = RepoAdapter()
+        setAdapter()
+        setObserver()
     }
-    
+
+    private fun setObserver() {
+        viewModel.githubRepo.observe(viewLifecycleOwner){
+            repoAdapter.data = it.items as MutableList<ReposItems>
+            repoAdapter.notifyDataSetChanged()
+        }
+    }
+
+    private fun setAdapter() {
+        binding.searchRepoRecyclerview.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = repoAdapter
+            addItemDecoration(DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL))
+        }
+    }
+
+
+
 }

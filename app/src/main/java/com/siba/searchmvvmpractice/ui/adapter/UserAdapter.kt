@@ -24,7 +24,7 @@ class UserAdapter<B : UserItemBinding> : RecyclerView.Adapter<UserAdapter<B>.Use
     inner class UserViewHolder<B : UserItemBinding>(itemView : View) : RecyclerView.ViewHolder(itemView){
         val binding : B = DataBindingUtil.bind(itemView)!!
         fun bind(item : Items){
-            binding.setVariable(BR.ItemData,item)
+            binding.setVariable(BR.userItem,item)
         }
     }
 

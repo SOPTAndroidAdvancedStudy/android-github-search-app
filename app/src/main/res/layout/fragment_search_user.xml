@@ -15,7 +15,7 @@
         tools:context=".ui.presentation.fragment.SearchUserFragment">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/userRecyclerView"
+            android:id="@+id/search_user_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>

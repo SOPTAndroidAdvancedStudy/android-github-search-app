@@ -15,6 +15,8 @@ class SearchRepository(
 ) {
     suspend fun fetchUser(userName : String) = retrofitService.getUsers(userName)
 
+    suspend fun fetchRepo(repoName : String) = retrofitService.getRepos(repoName)
+
     suspend fun insertKeyword(recentSearchTerm: RecentSearchTerm){
         searchTermDao.insertKeyword(recentSearchTerm)
     }
