@@ -1,11 +1,8 @@
 package com.siba.searchmvvmpractice.ui.presentation.activity
 
-import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.widget.SearchView
-import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
@@ -17,7 +14,7 @@ import com.siba.searchmvvmpractice.databinding.ActivitySearchBinding
 import com.siba.searchmvvmpractice.databinding.SearchTermItemBinding
 import com.siba.searchmvvmpractice.ui.adapter.SearchTermAdapter
 import com.siba.searchmvvmpractice.ui.viewmodel.SearchViewModel
-import com.siba.searchmvvmpractice.utils.Injection
+import com.siba.searchmvvmpractice.injection.Injection
 
 class SearchActivity : AppCompatActivity() {
 
@@ -38,14 +35,6 @@ class SearchActivity : AppCompatActivity() {
 
     }
 
-    private fun setSearchTermRecyclerView() {
-        binding.searchTermRecyclerviewMain.apply {
-            adapter = searchTermAdapter
-            layoutManager = LinearLayoutManager(this@SearchActivity)
-            addItemDecoration(DividerItemDecoration(this@SearchActivity, LinearLayoutManager.VERTICAL))
-        }
-    }
-
     private fun initViewModel() {
         viewModel = ViewModelProvider(this, Injection.provideSearchViewModelFactory(this)).get(SearchViewModel::class.java)
     }
@@ -57,6 +46,15 @@ class SearchActivity : AppCompatActivity() {
         }
         searchTermAdapter.notifyDataSetChanged()
     }
+
+    private fun setSearchTermRecyclerView() {
+        binding.searchTermRecyclerviewMain.apply {
+            adapter = searchTermAdapter
+            layoutManager = LinearLayoutManager(this@SearchActivity)
+            addItemDecoration(DividerItemDecoration(this@SearchActivity, LinearLayoutManager.VERTICAL))
+        }
+    }
+
 
     fun setSearchView(searchView: SearchView) {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -90,4 +88,5 @@ class SearchActivity : AppCompatActivity() {
         else
             viewModel.searchRepo()
     }
+
 }

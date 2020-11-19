@@ -4,14 +4,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.siba.searchmvvmpractice.BR
 import com.siba.searchmvvmpractice.R
 import com.siba.searchmvvmpractice.databinding.SearchTermItemBinding
 import com.siba.searchmvvmpractice.local.entity.RecentSearchTerm
-import com.siba.searchmvvmpractice.model.ReposItems
-import com.siba.searchmvvmpractice.model.SearchTermData
 
 class SearchTermAdapter<B : SearchTermItemBinding> : RecyclerView.Adapter<SearchTermAdapter<B>.SearchTermViewHolder<B>>() {
     var data  = emptyList<RecentSearchTerm>()

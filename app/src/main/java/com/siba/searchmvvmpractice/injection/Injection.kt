@@ -1,4 +1,4 @@
-package com.siba.searchmvvmpractice.utils
+package com.siba.searchmvvmpractice.injection
 
 import android.content.Context
 import androidx.lifecycle.ViewModelProvider

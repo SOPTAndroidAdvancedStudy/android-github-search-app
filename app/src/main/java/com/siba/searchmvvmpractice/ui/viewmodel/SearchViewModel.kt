@@ -1,17 +1,12 @@
 package com.siba.searchmvvmpractice.ui.viewmodel
 
-import android.util.Log
-import android.view.animation.Transformation
 import androidx.lifecycle.*
 import com.siba.searchmvvmpractice.local.entity.RecentSearchTerm
-import com.siba.searchmvvmpractice.model.GithubUserData
-import com.siba.searchmvvmpractice.model.ReposData
-import com.siba.searchmvvmpractice.model.RetrofitData
-import com.siba.searchmvvmpractice.model.SearchTermData
+import com.siba.searchmvvmpractice.remote.model.ReposData
+import com.siba.searchmvvmpractice.remote.model.RetrofitData
 import com.siba.searchmvvmpractice.repository.SearchRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class SearchViewModel(
         private val repository: SearchRepository

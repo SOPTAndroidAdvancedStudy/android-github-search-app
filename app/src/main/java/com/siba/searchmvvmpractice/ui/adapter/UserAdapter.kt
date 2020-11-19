@@ -7,7 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.siba.searchmvvmpractice.BR
 import com.siba.searchmvvmpractice.R
-import com.siba.searchmvvmpractice.model.Items
+import com.siba.searchmvvmpractice.remote.model.Items
 import com.siba.searchmvvmpractice.databinding.UserItemBinding
 
 class UserAdapter<B : UserItemBinding> : RecyclerView.Adapter<UserAdapter<B>.UserViewHolder<B>>() {

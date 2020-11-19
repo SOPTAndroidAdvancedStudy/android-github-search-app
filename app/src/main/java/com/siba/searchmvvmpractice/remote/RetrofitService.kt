@@ -1,8 +1,8 @@
 package com.siba.searchmvvmpractice.remote
 
-import com.siba.searchmvvmpractice.model.GithubUserData
-import com.siba.searchmvvmpractice.model.ReposData
-import com.siba.searchmvvmpractice.model.RetrofitData
+import com.siba.searchmvvmpractice.remote.model.GithubUserData
+import com.siba.searchmvvmpractice.remote.model.ReposData
+import com.siba.searchmvvmpractice.remote.model.RetrofitData
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

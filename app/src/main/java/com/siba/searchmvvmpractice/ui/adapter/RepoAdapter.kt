@@ -8,8 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.siba.searchmvvmpractice.BR
 import com.siba.searchmvvmpractice.R
 import com.siba.searchmvvmpractice.databinding.RepoItemBinding
-import com.siba.searchmvvmpractice.model.Items
-import com.siba.searchmvvmpractice.model.ReposItems
+import com.siba.searchmvvmpractice.remote.model.ReposItems
 
 class RepoAdapter<B : RepoItemBinding> : RecyclerView.Adapter<RepoAdapter<B>.RepoViewHolder<B>>() {
     var data  = mutableListOf<ReposItems>()

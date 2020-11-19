@@ -1,4 +1,4 @@
-package com.siba.searchmvvmpractice.model
+package com.siba.searchmvvmpractice.remote.model
 
 data class ReposData (
         val total_count : Int,
