@@ -23,7 +23,7 @@ abstract class SearchTermDatabase : RoomDatabase(){
                     instance = Room.databaseBuilder(
                         context.applicationContext,
                         SearchTermDatabase::class.java,
-                        "search_keyword_history_database"
+                        "search_keyword_history_database2"
                     ).build()
                     INSTANCE = instance
                 }

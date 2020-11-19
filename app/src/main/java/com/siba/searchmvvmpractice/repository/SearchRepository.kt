@@ -3,6 +3,7 @@ package com.siba.searchmvvmpractice.repository
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
+import androidx.room.withTransaction
 import com.siba.searchmvvmpractice.local.dao.SearchTermDao
 import com.siba.searchmvvmpractice.local.database.SearchTermDatabase
 import com.siba.searchmvvmpractice.local.entity.RecentSearchTerm
@@ -20,8 +21,9 @@ class SearchRepository(
 
     suspend fun fetchRepo(repoName : String) = retrofitService.getRepos(repoName)
 
-    suspend fun insertKeyword(recentSearchTerm: RecentSearchTerm){
+    suspend fun insert(recentSearchTerm: RecentSearchTerm){
         searchTermDao.insertKeyword(recentSearchTerm)
     }
 
+    fun getAll() = searchTermDao.getAllKeyword()
 }
