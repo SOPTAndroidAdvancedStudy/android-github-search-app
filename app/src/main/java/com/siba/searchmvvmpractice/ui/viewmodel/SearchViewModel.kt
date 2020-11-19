@@ -2,8 +2,8 @@ package com.siba.searchmvvmpractice.ui.viewmodel
 
 import androidx.lifecycle.*
 import com.siba.searchmvvmpractice.local.entity.RecentSearchTerm
-import com.siba.searchmvvmpractice.remote.model.ReposData
-import com.siba.searchmvvmpractice.remote.model.RetrofitData
+import com.siba.searchmvvmpractice.remote.model.UserCatalog
+import com.siba.searchmvvmpractice.remote.model.UserRepositoryCatalog
 import com.siba.searchmvvmpractice.repository.SearchRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,12 +16,12 @@ class SearchViewModel(
     val userName: MutableLiveData<String>
         get() = _userName
 
-    private val _githubUser = MutableLiveData<RetrofitData>()
-    val githubUser: MutableLiveData<RetrofitData>
+    private val _githubUser = MutableLiveData<UserCatalog>()
+    val githubUser: MutableLiveData<UserCatalog>
         get() = _githubUser
 
-    private val _githubRepo = MutableLiveData<ReposData>()
-    val githubRepo: MutableLiveData<ReposData>
+    private val _githubRepo = MutableLiveData<UserRepositoryCatalog>()
+    val githubRepo: MutableLiveData<UserRepositoryCatalog>
         get() = _githubRepo
 
     var allSearch : LiveData<List<RecentSearchTerm>> = repository.getAll()

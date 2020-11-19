@@ -1,7 +1,7 @@
 package com.siba.searchmvvmpractice.remote
 
-import com.siba.searchmvvmpractice.remote.model.ReposData
-import com.siba.searchmvvmpractice.remote.model.RetrofitData
+import com.siba.searchmvvmpractice.remote.model.UserCatalog
+import com.siba.searchmvvmpractice.remote.model.UserRepositoryCatalog
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -10,11 +10,11 @@ interface RetrofitService {
     @GET("search/users")
     suspend fun getUsers(
             @Query("q") user : String
-    ) : RetrofitData
+    ) : UserCatalog
 
     @GET("search/repositories")
     suspend fun getRepos(
         @Query("q") repoName : String
-    ) : ReposData
+    ) : UserRepositoryCatalog
 
 }

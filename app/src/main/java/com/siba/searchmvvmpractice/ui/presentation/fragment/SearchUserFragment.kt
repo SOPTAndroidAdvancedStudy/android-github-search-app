@@ -1,6 +1,7 @@
 package com.siba.searchmvvmpractice.ui.presentation.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,9 +12,9 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.siba.searchmvvmpractice.R
 import com.siba.searchmvvmpractice.ui.adapter.UserAdapter
-import com.siba.searchmvvmpractice.remote.model.Items
 import com.siba.searchmvvmpractice.databinding.FragmentSearchUserBinding
 import com.siba.searchmvvmpractice.databinding.UserItemBinding
+import com.siba.searchmvvmpractice.remote.model.Users
 import com.siba.searchmvvmpractice.ui.viewmodel.SearchViewModel
 
 class SearchUserFragment : Fragment() {
@@ -48,8 +49,9 @@ class SearchUserFragment : Fragment() {
 
     fun setObserver(){
         viewModel.githubUser.observe(viewLifecycleOwner){
-            userAdapter.data = it.items as MutableList<Items>
-            userAdapter.notifyDataSetChanged()
+            Log.i("SearchUserFragment",it.users.toString())
+/*            userAdapter.data = it.users as MutableList<Users>
+            userAdapter.notifyDataSetChanged()*/
         }
     }
 }

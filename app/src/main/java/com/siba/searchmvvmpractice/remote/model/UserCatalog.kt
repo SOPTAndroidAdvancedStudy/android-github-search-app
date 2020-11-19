@@ -1,11 +1,11 @@
 package com.siba.searchmvvmpractice.remote.model
 
-data class RetrofitData(
+data class UserCatalog(
         val total_count : Int,
         val incomplete_results : Boolean,
-        val items : List<Items>
+        val users : List<Users>
 )
-data class Items (
+data class Users (
         val login : String,
         val id : Int,
         val node_id : String,

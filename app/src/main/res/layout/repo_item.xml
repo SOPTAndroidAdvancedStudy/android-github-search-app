@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="repoItem"
-            type="com.siba.searchmvvmpractice.remote.model.ReposItems" />
+            name="userRepository"
+            type="com.siba.searchmvvmpractice.remote.model.UserRepository" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
-            android:text="@{repoItem.full_name}"
+            android:text="@{userRepository.full_name}"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="16dp"
-            android:text="@{repoItem.html_url}"
+            android:text="@{userRepository.html_url}"
             android:textSize="12sp"
             android:inputType="textUri"
             app:layout_constraintBottom_toBottomOf="parent"
