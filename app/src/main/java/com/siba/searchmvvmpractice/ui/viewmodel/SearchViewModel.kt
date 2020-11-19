@@ -1,5 +1,6 @@
 package com.siba.searchmvvmpractice.ui.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.siba.searchmvvmpractice.local.entity.RecentSearchTerm
 import com.siba.searchmvvmpractice.remote.model.UserCatalog
@@ -27,11 +28,11 @@ class SearchViewModel(
     var allSearch : LiveData<List<RecentSearchTerm>> = repository.getAll()
 
     fun searchUser() = viewModelScope.launch {
-        githubUser.value = repository.fetchUser(userName.value.toString())
+        _githubUser.value = repository.fetchUser(userName.value.toString())
     }
 
     fun searchRepo() = viewModelScope.launch {
-        githubRepo.value = repository.fetchRepo(userName.value.toString())
+        _githubRepo.value = repository.fetchRepo(userName.value.toString())
     }
 
     fun saveSearchTerm() = viewModelScope.launch(Dispatchers.IO) {

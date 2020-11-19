@@ -13,8 +13,7 @@ interface RetrofitService {
     ) : UserCatalog
 
     @GET("search/repositories")
-    suspend fun getRepos(
-        @Query("q") repoName : String
+    suspend fun getRepositories(
+            @Query("q") repositoryName : String
     ) : UserRepositoryCatalog
-
 }

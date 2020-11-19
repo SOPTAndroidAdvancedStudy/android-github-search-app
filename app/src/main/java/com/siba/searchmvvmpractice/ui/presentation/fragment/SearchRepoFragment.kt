@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.siba.searchmvvmpractice.R
 import com.siba.searchmvvmpractice.databinding.FragmentSearchRepoBinding
 import com.siba.searchmvvmpractice.databinding.RepoItemBinding
+import com.siba.searchmvvmpractice.remote.model.UserRepository
 import com.siba.searchmvvmpractice.remote.model.UserRepositoryCatalog
 import com.siba.searchmvvmpractice.ui.adapter.RepoAdapter
 import com.siba.searchmvvmpractice.ui.viewmodel.SearchViewModel

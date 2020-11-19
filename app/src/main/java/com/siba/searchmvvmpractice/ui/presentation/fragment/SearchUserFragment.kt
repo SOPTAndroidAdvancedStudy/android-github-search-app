@@ -49,9 +49,8 @@ class SearchUserFragment : Fragment() {
 
     fun setObserver(){
         viewModel.githubUser.observe(viewLifecycleOwner){
-            Log.i("SearchUserFragment",it.users.toString())
-/*            userAdapter.data = it.users as MutableList<Users>
-            userAdapter.notifyDataSetChanged()*/
+            userAdapter.data = it.users as MutableList<Users>
+            userAdapter.notifyDataSetChanged()
         }
     }
 }
