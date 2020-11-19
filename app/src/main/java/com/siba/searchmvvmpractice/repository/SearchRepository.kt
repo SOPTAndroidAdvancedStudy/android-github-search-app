@@ -5,6 +5,7 @@ import com.siba.searchmvvmpractice.local.entity.RecentSearchTerm
 import com.siba.searchmvvmpractice.remote.RetrofitService
 import com.siba.searchmvvmpractice.remote.model.UserCatalog
 import com.siba.searchmvvmpractice.remote.model.UserRepositoryCatalog
+import com.siba.searchmvvmpractice.remote.model.Users
 
 class SearchRepository(
     private val retrofitService: RetrofitService,
