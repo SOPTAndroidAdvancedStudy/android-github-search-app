@@ -62,8 +62,7 @@ class SearchActivity : AppCompatActivity() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 viewModel.userName.value = query!!
-                viewModel.searchUser()
-                viewModel.searchRepo()
+                search()
                 viewModel.saveSearchTerm()
                 return false
             }
@@ -85,4 +84,10 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
+    fun search(){
+        if(binding.tabMain.selectedTabPosition == 0)
+            viewModel.searchUser()
+        else
+            viewModel.searchRepo()
+    }
 }
