@@ -23,6 +23,9 @@ class SearchActivity : AppCompatActivity() {
 
     private lateinit var searchTermAdapter: SearchTermAdapter<SearchTermItemBinding>
 
+    // TODO : 1. 최근검색어가 2개씩 저장되는 issue 처리
+    // TODO : 2. OFFLINE 캐싱
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_search)
@@ -54,7 +57,6 @@ class SearchActivity : AppCompatActivity() {
             addItemDecoration(DividerItemDecoration(this@SearchActivity, LinearLayoutManager.VERTICAL))
         }
     }
-
 
     fun setSearchView(searchView: SearchView) {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
