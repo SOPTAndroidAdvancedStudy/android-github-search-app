@@ -41,7 +41,7 @@ class SearchRepoFragment : Fragment() {
 
     private fun setObserver() {
         viewModel.githubRepo.observe(viewLifecycleOwner){
-            repoAdapter.data = it.userRepository as MutableList<UserRepositoryCatalog>
+            repoAdapter.data = it.userRepository as MutableList<UserRepository>
             repoAdapter.notifyDataSetChanged()
         }
     }
