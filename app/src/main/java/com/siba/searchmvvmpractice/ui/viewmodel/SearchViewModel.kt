@@ -43,10 +43,8 @@ class SearchViewModel(
         try{
             _githubRepo.value = repository.fetchRepo(userName.value.toString())
         } catch (e : NullPointerException){
-            // retry? or offline Caching
             e.printStackTrace()
         } catch (e : InterruptedException){
-            // 쓰레드가 중단되었을 경우
             e.printStackTrace()
         }
     }
