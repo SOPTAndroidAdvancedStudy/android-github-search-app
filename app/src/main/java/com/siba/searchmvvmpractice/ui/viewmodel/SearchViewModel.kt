@@ -8,6 +8,8 @@ import com.siba.searchmvvmpractice.remote.model.UserRepositoryCatalog
 import com.siba.searchmvvmpractice.repository.SearchRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.lang.Exception
+import java.lang.NullPointerException
 
 class SearchViewModel(
         private val repository: SearchRepository
@@ -28,11 +30,25 @@ class SearchViewModel(
     var allSearch : LiveData<List<RecentSearchTerm>> = repository.getAll()
 
     fun searchUser() = viewModelScope.launch {
-        _githubUser.value = repository.fetchUser(userName.value.toString())
+        try {
+            _githubUser.value = repository.fetchUser(userName.value.toString())
+        } catch (e : NullPointerException){
+            e.printStackTrace()
+        } catch (e : InterruptedException){
+            e.printStackTrace()
+        }
     }
 
     fun searchRepo() = viewModelScope.launch {
-        _githubRepo.value = repository.fetchRepo(userName.value.toString())
+        try{
+            _githubRepo.value = repository.fetchRepo(userName.value.toString())
+        } catch (e : NullPointerException){
+            // retry? or offline Caching
+            e.printStackTrace()
+        } catch (e : InterruptedException){
+            // 쓰레드가 중단되었을 경우
+            e.printStackTrace()
+        }
     }
 
     fun saveSearchTerm() = viewModelScope.launch(Dispatchers.IO) {

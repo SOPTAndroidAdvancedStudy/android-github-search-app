@@ -24,7 +24,8 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var searchTermAdapter: SearchTermAdapter<SearchTermItemBinding>
 
     // TODO : 1. 최근검색어가 2개씩 저장되는 issue 처리
-    // TODO : 2. OFFLINE 캐싱
+    // TODO : 2. 서버에서 데이터가져오는걸 실패할 경우 앱이 죽지 말고 있어야함 , 에러처리 주체도 생각해봐야 할 듯
+    // TODO : 3. OFFLINE 캐싱
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

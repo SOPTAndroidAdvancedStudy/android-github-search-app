@@ -53,4 +53,5 @@ class SearchUserFragment : Fragment() {
             userAdapter.notifyDataSetChanged()
         }
     }
+
 }
