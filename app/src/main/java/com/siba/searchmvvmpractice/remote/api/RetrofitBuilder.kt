@@ -7,13 +7,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitBuilder {
     private const val URL = "https://api.github.com"
 
-    private fun getRetrofit() : Retrofit {
+    private fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
                 .baseUrl(URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
     }
 
-    val retrofitService : RetrofitService = getRetrofit().create(RetrofitService::class.java)
+    val retrofitService: RetrofitService = getRetrofit().create(RetrofitService::class.java)
 
 }

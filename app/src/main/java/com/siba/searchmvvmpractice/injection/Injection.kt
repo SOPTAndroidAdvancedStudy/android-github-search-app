@@ -10,16 +10,16 @@ import com.siba.searchmvvmpractice.ui.base.SearchViewModelFactory
 
 object Injection {
 
-    fun provideRetrofitService() : RetrofitService{
+    private fun provideRetrofitService(): RetrofitService {
         return RetrofitBuilder.retrofitService
     }
 
-    fun provideMainRepository(context : Context) : SearchRepository{
+    private fun provideMainRepository(context: Context): SearchRepository {
         val database = SearchTermDatabase.getInstance(context)
-        return SearchRepository(provideRetrofitService(),database.searchTermDao)
+        return SearchRepository(provideRetrofitService(), database.searchTermDao)
     }
 
-    fun provideSearchViewModelFactory(context : Context) : ViewModelProvider.Factory{
+    fun provideSearchViewModelFactory(context: Context): ViewModelProvider.Factory {
         return SearchViewModelFactory(provideMainRepository(context))
     }
 

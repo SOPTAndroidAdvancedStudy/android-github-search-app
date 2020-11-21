@@ -1,7 +1,7 @@
 package com.siba.searchmvvmpractice.ui.presentation.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
@@ -9,12 +9,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.siba.searchmvvmpractice.R
-import com.siba.searchmvvmpractice.ui.adapter.ViewPagerAdapter
 import com.siba.searchmvvmpractice.databinding.ActivitySearchBinding
 import com.siba.searchmvvmpractice.databinding.SearchTermItemBinding
-import com.siba.searchmvvmpractice.ui.adapter.SearchTermAdapter
-import com.siba.searchmvvmpractice.ui.viewmodel.SearchViewModel
 import com.siba.searchmvvmpractice.injection.Injection
+import com.siba.searchmvvmpractice.ui.adapter.SearchTermAdapter
+import com.siba.searchmvvmpractice.ui.adapter.ViewPagerAdapter
+import com.siba.searchmvvmpractice.ui.viewmodel.SearchViewModel
 
 class SearchActivity : AppCompatActivity() {
 
@@ -26,6 +26,7 @@ class SearchActivity : AppCompatActivity() {
     // TODO : 1. 최근검색어가 2개씩 저장되는 issue 처리
     // TODO : 2. 서버에서 데이터가져오는걸 실패할 경우 앱이 죽지 말고 있어야함 , 에러처리 주체도 생각해봐야 할 듯
     // TODO : 3. OFFLINE 캐싱
+    // TODO : 4. base Factory rename to factory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,12 +41,14 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun initViewModel() {
-        viewModel = ViewModelProvider(this, Injection.provideSearchViewModelFactory(this)).get(SearchViewModel::class.java)
+        viewModel = ViewModelProvider(this, Injection.provideSearchViewModelFactory(this)).get(
+            SearchViewModel::class.java
+        )
     }
 
     private fun initViews() {
         searchTermAdapter = SearchTermAdapter()
-        viewModel.allSearch.observe(this){
+        viewModel.allSearch.observe(this) {
             searchTermAdapter.setData(it)
         }
         searchTermAdapter.notifyDataSetChanged()
@@ -55,11 +58,16 @@ class SearchActivity : AppCompatActivity() {
         binding.searchTermRecyclerviewMain.apply {
             adapter = searchTermAdapter
             layoutManager = LinearLayoutManager(this@SearchActivity)
-            addItemDecoration(DividerItemDecoration(this@SearchActivity, LinearLayoutManager.VERTICAL))
+            addItemDecoration(
+                DividerItemDecoration(
+                    this@SearchActivity,
+                    LinearLayoutManager.VERTICAL
+                )
+            )
         }
     }
 
-    fun setSearchView(searchView: SearchView) {
+    private fun setSearchView(searchView: SearchView) {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 viewModel.userName.value = query!!
@@ -74,7 +82,7 @@ class SearchActivity : AppCompatActivity() {
         })
     }
 
-    fun setViewPagerAdapter(fm: FragmentManager) {
+    private fun setViewPagerAdapter(fm: FragmentManager) {
         binding.viewpagerMain.apply {
             adapter = ViewPagerAdapter(fm)
         }
@@ -85,8 +93,8 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
-    fun search(){
-        if(binding.tabMain.selectedTabPosition == 0)
+    private fun search() {
+        if (binding.tabMain.selectedTabPosition == 0)
             viewModel.searchUser()
         else
             viewModel.searchRepo()

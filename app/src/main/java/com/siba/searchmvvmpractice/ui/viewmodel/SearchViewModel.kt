@@ -1,15 +1,15 @@
 package com.siba.searchmvvmpractice.ui.viewmodel
 
-import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.siba.searchmvvmpractice.local.entity.RecentSearchTerm
 import com.siba.searchmvvmpractice.remote.model.UserCatalog
 import com.siba.searchmvvmpractice.remote.model.UserRepositoryCatalog
 import com.siba.searchmvvmpractice.repository.SearchRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.lang.Exception
-import java.lang.NullPointerException
 
 class SearchViewModel(
         private val repository: SearchRepository
@@ -27,24 +27,24 @@ class SearchViewModel(
     val githubRepo: MutableLiveData<UserRepositoryCatalog>
         get() = _githubRepo
 
-    var allSearch : LiveData<List<RecentSearchTerm>> = repository.getAll()
+    var allSearch: LiveData<List<RecentSearchTerm>> = repository.getAll()
 
     fun searchUser() = viewModelScope.launch {
         try {
             _githubUser.value = repository.fetchUser(userName.value.toString())
-        } catch (e : NullPointerException){
+        } catch (e: NullPointerException) {
             e.printStackTrace()
-        } catch (e : InterruptedException){
+        } catch (e: InterruptedException) {
             e.printStackTrace()
         }
     }
 
     fun searchRepo() = viewModelScope.launch {
-        try{
+        try {
             _githubRepo.value = repository.fetchRepo(userName.value.toString())
-        } catch (e : NullPointerException){
+        } catch (e: NullPointerException) {
             e.printStackTrace()
-        } catch (e : InterruptedException){
+        } catch (e: InterruptedException) {
             e.printStackTrace()
         }
     }

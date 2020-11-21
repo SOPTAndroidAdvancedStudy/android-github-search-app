@@ -10,10 +10,13 @@ import com.siba.searchmvvmpractice.R
 import com.siba.searchmvvmpractice.databinding.SearchTermItemBinding
 import com.siba.searchmvvmpractice.local.entity.RecentSearchTerm
 
-class SearchTermAdapter<B : SearchTermItemBinding> : RecyclerView.Adapter<SearchTermAdapter<B>.SearchTermViewHolder<B>>() {
-    var data  = emptyList<RecentSearchTerm>()
+class SearchTermAdapter<B : SearchTermItemBinding> :
+    RecyclerView.Adapter<SearchTermAdapter<B>.SearchTermViewHolder<B>>() {
+    var data = emptyList<RecentSearchTerm>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchTermViewHolder<B> =
-            SearchTermViewHolder<B>(LayoutInflater.from(parent.context).inflate(R.layout.search_term_item,parent,false))
+        SearchTermViewHolder<B>(
+            LayoutInflater.from(parent.context).inflate(R.layout.search_term_item, parent, false)
+        )
 
     override fun onBindViewHolder(holder: SearchTermViewHolder<B>, position: Int) {
         holder.bind(data[position])
@@ -21,15 +24,16 @@ class SearchTermAdapter<B : SearchTermItemBinding> : RecyclerView.Adapter<Search
 
     override fun getItemCount(): Int = data.size
 
-    internal fun setData(recentSearchTerm: List<RecentSearchTerm>){
+    internal fun setData(recentSearchTerm: List<RecentSearchTerm>) {
         this.data = recentSearchTerm
         notifyDataSetChanged()
     }
 
-    inner class SearchTermViewHolder<B : SearchTermItemBinding>(itemView : View) : RecyclerView.ViewHolder(itemView) {
-        val binding : B = DataBindingUtil.bind(itemView)!!
-        fun bind(recentSearchTerm: RecentSearchTerm){
-            binding.setVariable(BR.searchTerm,recentSearchTerm)
+    inner class SearchTermViewHolder<B : SearchTermItemBinding>(itemView: View) :
+        RecyclerView.ViewHolder(itemView) {
+        private val binding: B = DataBindingUtil.bind(itemView)!!
+        fun bind(recentSearchTerm: RecentSearchTerm) {
+            binding.setVariable(BR.searchTerm, recentSearchTerm)
         }
     }
 

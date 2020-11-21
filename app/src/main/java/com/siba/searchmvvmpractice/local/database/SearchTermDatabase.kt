@@ -7,19 +7,19 @@ import androidx.room.RoomDatabase
 import com.siba.searchmvvmpractice.local.dao.SearchTermDao
 import com.siba.searchmvvmpractice.local.entity.RecentSearchTerm
 
-@Database(entities = [RecentSearchTerm::class],version = 1)
-abstract class SearchTermDatabase : RoomDatabase(){
-    abstract val searchTermDao : SearchTermDao
+@Database(entities = [RecentSearchTerm::class], version = 1)
+abstract class SearchTermDatabase : RoomDatabase() {
+    abstract val searchTermDao: SearchTermDao
 
-    companion object{
+    companion object {
         @Volatile
-        private var INSTANCE : SearchTermDatabase? = null
+        private var INSTANCE: SearchTermDatabase? = null
 
-        fun getInstance(context : Context) : SearchTermDatabase{
-            synchronized(this){
+        fun getInstance(context: Context): SearchTermDatabase {
+            synchronized(this) {
                 var instance = INSTANCE
 
-                if(instance == null){
+                if (instance == null) {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
                         SearchTermDatabase::class.java,
