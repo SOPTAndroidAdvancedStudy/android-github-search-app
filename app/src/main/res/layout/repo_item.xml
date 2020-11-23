@@ -13,10 +13,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            android:id="@+id/login"
+            android:id="@+id/repository_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:text="@{userRepository.full_name}"
             android:textSize="12sp"
@@ -24,16 +24,15 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/url"
+            android:id="@+id/repository_url"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
             android:text="@{userRepository.html_url}"
             android:textSize="12sp"
-            android:inputType="textUri"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/login"
-            app:layout_constraintTop_toBottomOf="@+id/login" />
+            app:layout_constraintStart_toStartOf="@+id/repository_name"
+            app:layout_constraintTop_toBottomOf="@+id/repository_name" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
