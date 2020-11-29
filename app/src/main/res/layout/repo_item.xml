@@ -6,7 +6,7 @@
     <data>
         <variable
             name="userRepository"
-            type="com.siba.searchmvvmpractice.remote.model.UserRepository" />
+            type="com.siba.searchmvvmpractice.remote.model.Repository" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

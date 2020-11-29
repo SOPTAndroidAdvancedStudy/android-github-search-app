@@ -1,4 +1,4 @@
-package com.siba.searchmvvmpractice.ui.base
+package com.siba.searchmvvmpractice.ui.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

@@ -25,7 +25,7 @@ class SearchUserFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search_user, container, false)
         binding.viewModel = viewModel
         return binding.root

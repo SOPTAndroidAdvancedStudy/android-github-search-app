@@ -1,9 +1,11 @@
 package com.siba.searchmvvmpractice.ui.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.siba.searchmvvmpractice.local.entity.DatabaseGithubUserInfo
 import com.siba.searchmvvmpractice.local.entity.RecentSearchTerm
 import com.siba.searchmvvmpractice.remote.model.UserCatalog
 import com.siba.searchmvvmpractice.remote.model.UserRepositoryCatalog
@@ -15,9 +17,9 @@ class SearchViewModel(
         private val repository: SearchRepository
 ) : ViewModel() {
 
-    private val _userName = MutableLiveData<String>()
-    val userName: MutableLiveData<String>
-        get() = _userName
+    private val _keyword = MutableLiveData<String>()
+    val keyword: MutableLiveData<String>
+        get() = _keyword
 
     private val _githubUser = MutableLiveData<UserCatalog>()
     val githubUser: MutableLiveData<UserCatalog>
@@ -27,11 +29,14 @@ class SearchViewModel(
     val githubRepo: MutableLiveData<UserRepositoryCatalog>
         get() = _githubRepo
 
+
     var allSearch: LiveData<List<RecentSearchTerm>> = repository.getAll()
+
+    var allData : LiveData<DatabaseGithubUserInfo> = repository.fetchGithubUserDatabase(keyword.value.toString())
 
     fun searchUser() = viewModelScope.launch {
         try {
-            _githubUser.value = repository.fetchUser(userName.value.toString())
+            _githubUser.value = repository.fetchUser(keyword.value.toString())
         } catch (e: NullPointerException) {
             e.printStackTrace()
         } catch (e: InterruptedException) {
@@ -39,9 +44,10 @@ class SearchViewModel(
         }
     }
 
+
     fun searchRepo() = viewModelScope.launch {
         try {
-            _githubRepo.value = repository.fetchRepo(userName.value.toString())
+            _githubRepo.value = repository.fetchRepo(keyword.value.toString())
         } catch (e: NullPointerException) {
             e.printStackTrace()
         } catch (e: InterruptedException) {
@@ -50,8 +56,12 @@ class SearchViewModel(
     }
 
     fun saveSearchTerm() = viewModelScope.launch(Dispatchers.IO) {
-        val recentSearchTerm = RecentSearchTerm(keyword = userName.value.toString())
+        val recentSearchTerm = RecentSearchTerm(keyword = keyword.value.toString())
         repository.insert(recentSearchTerm)
     }
 
+    fun insertUserToDatabase() = viewModelScope.launch {
+        repository.insertGithubUser(keyword.value.toString())
+        Log.i("SearchViewModel","insert done")
+    }
 }

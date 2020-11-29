@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.siba.searchmvvmpractice.R
 import com.siba.searchmvvmpractice.databinding.FragmentSearchRepoBinding
 import com.siba.searchmvvmpractice.databinding.RepoItemBinding
-import com.siba.searchmvvmpractice.remote.model.UserRepository
+import com.siba.searchmvvmpractice.remote.model.Repository
 import com.siba.searchmvvmpractice.ui.adapter.RepoAdapter
 import com.siba.searchmvvmpractice.ui.viewmodel.SearchViewModel
 
@@ -40,7 +40,7 @@ class SearchRepoFragment : Fragment() {
 
     private fun setObserver() {
         viewModel.githubRepo.observe(viewLifecycleOwner) {
-            repoAdapter.data = it.userRepository as MutableList<UserRepository>
+            repoAdapter.data = it.repository as MutableList<Repository>
             repoAdapter.notifyDataSetChanged()
         }
     }
