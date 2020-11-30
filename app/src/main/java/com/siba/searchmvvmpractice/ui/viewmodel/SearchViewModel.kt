@@ -22,7 +22,7 @@ class SearchViewModel(
     val githubRepo: MutableLiveData<UserRepositoryCatalog>
         get() = _githubRepo
 
-    var allSearch: LiveData<List<RecentSearchTerm>> = repository.getAllSearchTerm()
+    var allRecentSearchTerm: LiveData<List<RecentSearchTerm>> = repository.getAllSearchTerm()
 
     fun searchRepo() = viewModelScope.launch {
         try {

@@ -43,7 +43,7 @@ class SearchActivity : AppCompatActivity() {
 
     private fun initViews() {
         searchTermAdapter = SearchTermAdapter()
-        viewModel.allSearch.observe(this) {
+        viewModel.allRecentSearchTerm.observe(this) {
             searchTermAdapter.setData(it)
         }
         searchTermAdapter.notifyDataSetChanged()
