@@ -1,12 +1,15 @@
 package com.siba.searchmvvmpractice.repository
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
+import com.siba.searchmvvmpractice.domain.DomainUsers
 import com.siba.searchmvvmpractice.local.dao.SearchDao
 import com.siba.searchmvvmpractice.local.entity.RecentSearchTerm
+import com.siba.searchmvvmpractice.local.entity.asDomainUsers
 import com.siba.searchmvvmpractice.remote.RetrofitService
-import com.siba.searchmvvmpractice.remote.model.UserCatalog
-import com.siba.searchmvvmpractice.remote.model.UserRepositoryCatalog
-import com.siba.searchmvvmpractice.remote.model.toDatabaseGithubRepositoryInfo
-import com.siba.searchmvvmpractice.remote.model.toDatabaseGithubUserInfo
+import com.siba.searchmvvmpractice.remote.model.repository.UserRepositoryCatalog
+import com.siba.searchmvvmpractice.remote.model.user.UserCatalog
+import com.siba.searchmvvmpractice.remote.model.user.asDatabaseModel
 
 class SearchRepository(
     private val retrofitService: RetrofitService,
@@ -17,25 +20,30 @@ class SearchRepository(
     suspend fun fetchRepo(repositoryName: String): UserRepositoryCatalog =
         retrofitService.getRepositories(repositoryName)
 
-
-    // offline Cache
-    suspend fun insertGithubUser(userName: String) =
-        searchDao.insertGithubUser(fetchUser(userName).toDatabaseGithubUserInfo(userName))
-
-    suspend fun insertGithubRepository(repositoryName: String) =
-        searchDao.insertGithubRepository(
-            fetchRepo(repositoryName).toDatabaseGithubRepositoryInfo(repositoryName)
-        )
-
-    fun fetchGithubUserDatabase(userName : String) =
-        searchDao.getAllGithubUser(userName)
-
-
-
     // Recent_Search_Term
-    suspend fun insert(recentSearchTerm: RecentSearchTerm) {
-        searchDao.insertKeyword(recentSearchTerm)
+    suspend fun insertRecentSearchTerm(recentSearchTerm: RecentSearchTerm) {
+        searchDao.insertRecentSearchTerm(recentSearchTerm)
     }
 
-    fun getAll() = searchDao.getAllKeyword()
+    fun getAllSearchTerm() = searchDao.getAllKeyword()
+
+    // offline Cache
+    fun fetchDatabaseGithubUser(keyword : String) : LiveData<List<DomainUsers>>{
+        return Transformations.map(searchDao.getAllGithubUser(keyword)) {
+            it.asDomainUsers()
+        }
+    }
+
+    suspend fun insertGithubUser(userName: String) =
+        searchDao.insertGithubUser(fetchUser(userName).asDatabaseModel())
+
+
+    /*suspend fun insertGithubRepository(repositoryName: String) =
+        searchDao.insertGithubRepository(
+            fetchRepo(repositoryName).toDatabaseGithubRepositoryInfo(repositoryName)
+        )*/
+
+/*    fun fetchGithubUserDatabase(userName : String) =
+        searchDao.getAllGithubUser(userName)*/
+
 }

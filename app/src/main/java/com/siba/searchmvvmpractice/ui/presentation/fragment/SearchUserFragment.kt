@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.siba.searchmvvmpractice.R
 import com.siba.searchmvvmpractice.databinding.FragmentSearchUserBinding
 import com.siba.searchmvvmpractice.databinding.UserItemBinding
-import com.siba.searchmvvmpractice.remote.model.Users
+import com.siba.searchmvvmpractice.domain.DomainUsers
 import com.siba.searchmvvmpractice.ui.adapter.UserAdapter
 import com.siba.searchmvvmpractice.ui.viewmodel.SearchViewModel
 
@@ -34,8 +34,8 @@ class SearchUserFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.lifecycleOwner = viewLifecycleOwner
         userAdapter = UserAdapter()
-        setObserver()
         setAdapter()
+        setAdapterData()
     }
 
     private fun setAdapter() {
@@ -44,12 +44,15 @@ class SearchUserFragment : Fragment() {
             adapter = userAdapter
             addItemDecoration(DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL))
         }
+
     }
 
-    fun setObserver() {
-        viewModel.githubUser.observe(viewLifecycleOwner) {
-            userAdapter.data = it.users as MutableList<Users>
-            userAdapter.notifyDataSetChanged()
+    private fun setAdapterData(){
+        viewModel.keyword.observe(viewLifecycleOwner){
+           viewModel.fetchGithubUserFromAppDatabase(it).observe(viewLifecycleOwner){data ->
+               userAdapter.data = data as MutableList<DomainUsers>
+               userAdapter.notifyDataSetChanged()
+           }
         }
     }
 

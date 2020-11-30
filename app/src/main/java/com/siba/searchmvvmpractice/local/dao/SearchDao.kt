@@ -13,20 +13,20 @@ import com.siba.searchmvvmpractice.local.entity.RecentSearchTerm
 interface SearchDao {
     // RecentSearchTerm Function
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertKeyword(recentSearchTerm: RecentSearchTerm)
+    suspend fun insertRecentSearchTerm(recentSearchTerm: RecentSearchTerm)
 
-    @Query("SELECT * FROM recent_search_term_table")
+    @Query("SELECT * FROM recent_search_term_table ORDER BY searchingTime DESC LIMIT 5")
     fun getAllKeyword(): LiveData<List<RecentSearchTerm>>
 
     // offline Cache
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertGithubUser(databaseGithubUserInfo: DatabaseGithubUserInfo)
+    suspend fun insertGithubUser(users : List<DatabaseGithubUserInfo>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertGithubRepository(databaseGithubRepositoryInfo: DatabaseGithubRepositoryInfo)
 
-    @Query("SELECT * FROM github_user_info_table WHERE userName = :keyword ")
-    fun getAllGithubUser(keyword : String) : LiveData<DatabaseGithubUserInfo>
+    @Query("SELECT * FROM github_user_info_table WHERE login LIKE '%' || :keyword || '%' ")
+    fun getAllGithubUser(keyword : String) : LiveData<List<DatabaseGithubUserInfo>>
 
     @Query("SELECT * FROM github_repository_info_table WHERE repositoryName = :keyword ")
     fun getAllGithubRepository(keyword : String) : LiveData<List<DatabaseGithubRepositoryInfo>>

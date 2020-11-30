@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.siba.searchmvvmpractice.R
 import com.siba.searchmvvmpractice.databinding.FragmentSearchRepoBinding
 import com.siba.searchmvvmpractice.databinding.RepoItemBinding
-import com.siba.searchmvvmpractice.remote.model.Repository
+import com.siba.searchmvvmpractice.remote.model.repository.Repository
 import com.siba.searchmvvmpractice.ui.adapter.RepoAdapter
 import com.siba.searchmvvmpractice.ui.viewmodel.SearchViewModel
 
@@ -25,7 +25,7 @@ class SearchRepoFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search_repo, container, false)
         binding.viewModel = viewModel
         return binding.root
