@@ -23,8 +23,6 @@ class SearchActivity : AppCompatActivity() {
 
     private lateinit var searchTermAdapter: SearchTermAdapter<SearchTermItemBinding>
 
-    // TODO : OFFLINE 캐싱
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_search)
