@@ -37,16 +37,16 @@ class SearchRepository(
         }
     }
 
-    suspend fun insertGithubUserToAppDatabase(keyword: String) =
-        searchDao.insertGithubUser(fetchUser(keyword).asDatabaseModel())
-
-    suspend fun insertGithubRepositoryToAppDatabase(keyword : String) =
-        searchDao.insertGithubRepository(fetchRepository(keyword).asDatabaseModel())
-
     fun fetchDatabaseGithubRepository(keyword : String) : LiveData<List<DomainRepository>>{
         return Transformations.map(searchDao.getAllGithubRepository(keyword)){
             it.asDomainRepository()
         }
     }
+
+    suspend fun insertGithubUserToAppDatabase(keyword: String) =
+        searchDao.insertGithubUser(fetchUser(keyword).asDatabaseModel())
+
+    suspend fun insertGithubRepositoryToAppDatabase(keyword : String) =
+        searchDao.insertGithubRepository(fetchRepository(keyword).asDatabaseModel())
 
 }
