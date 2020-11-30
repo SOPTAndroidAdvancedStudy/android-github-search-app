@@ -1,6 +1,7 @@
 package com.siba.searchmvvmpractice.remote.model.repository
 
 import com.google.gson.annotations.SerializedName
+import com.siba.searchmvvmpractice.local.entity.DatabaseGithubRepositoryInfo
 
 data class UserRepositoryCatalog(
         @SerializedName("total_count")
@@ -10,3 +11,12 @@ data class UserRepositoryCatalog(
         @SerializedName("items")
         val repository: List<Repository>
 )
+
+fun UserRepositoryCatalog.asDatabaseModel() : List<DatabaseGithubRepositoryInfo>{
+        return repository.map {
+                DatabaseGithubRepositoryInfo(
+                        full_name = it.full_name,
+                        html_url = it.html_url
+                )
+        }
+}

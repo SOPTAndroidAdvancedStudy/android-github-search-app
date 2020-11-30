@@ -93,7 +93,7 @@ class SearchActivity : AppCompatActivity() {
             viewModel.insertGithubUserToAppDatabase()
         }
         else {
-            viewModel.searchRepo()
+            viewModel.insertGithubRepositoryToAppDatabase()
         }
     }
 
