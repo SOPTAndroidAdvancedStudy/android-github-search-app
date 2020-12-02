@@ -44,10 +44,10 @@ class SearchUserFragment : Fragment() {
             adapter = userAdapter
             addItemDecoration(DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL))
         }
-
     }
 
     private fun setAdapterData(){
+        // 여기 부분 수정
         viewModel.keyword.observe(viewLifecycleOwner){
            viewModel.fetchGithubUserFromAppDatabase(it).observe(viewLifecycleOwner){data ->
                userAdapter.data = data as MutableList<DomainUsers>
