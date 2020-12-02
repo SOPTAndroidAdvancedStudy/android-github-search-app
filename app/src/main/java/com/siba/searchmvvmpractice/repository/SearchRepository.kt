@@ -24,6 +24,7 @@ class SearchRepository(
         retrofitService.getRepositories(repositoryName)
 
     // Recent_Search_Term
+    // Fixme : insert RecentKeyword will do networking is success
     suspend fun insertRecentSearchTerm(recentSearchTerm: RecentSearchTerm) {
         searchDao.insertRecentSearchTerm(recentSearchTerm)
     }
@@ -43,6 +44,7 @@ class SearchRepository(
         }
     }
 
+    // Fixme: 여기 로직 문제 있음 , fetchUser(keyword)가 이미 네트워킹이 되는 상태라서 네트워크상태에서 AppDatabase에 넣는다는게 이상함.
     suspend fun insertGithubUserToAppDatabase(keyword: String) =
         searchDao.insertGithubUser(fetchUser(keyword).asDatabaseModel())
 

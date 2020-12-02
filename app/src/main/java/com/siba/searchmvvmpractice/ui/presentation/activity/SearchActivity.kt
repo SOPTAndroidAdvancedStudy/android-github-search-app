@@ -28,9 +28,15 @@ class SearchActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_search)
         initViewModel()
         initViews()
+        setNetworkCallBack()
         setViewPagerAdapter(supportFragmentManager)
         setSearchView(binding.searchviewMain)
         setSearchTermRecyclerView()
+    }
+
+    // TODO : Network handling logic
+    private fun setNetworkCallBack() {
+
     }
 
     private fun initViewModel() {
