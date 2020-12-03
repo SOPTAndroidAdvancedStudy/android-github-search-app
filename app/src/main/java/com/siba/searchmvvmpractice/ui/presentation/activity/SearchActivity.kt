@@ -15,12 +15,13 @@ import com.siba.searchmvvmpractice.injection.Injection
 import com.siba.searchmvvmpractice.ui.adapter.SearchTermAdapter
 import com.siba.searchmvvmpractice.ui.adapter.ViewPagerAdapter
 import com.siba.searchmvvmpractice.ui.viewmodel.SearchViewModel
+import com.siba.searchmvvmpractice.utils.NetworkConnectionCheck
 
 class SearchActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySearchBinding
     private lateinit var viewModel: SearchViewModel
-
+    private lateinit var networkConnectionCheck: NetworkConnectionCheck
     private lateinit var searchTermAdapter: SearchTermAdapter<SearchTermItemBinding>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,15 +29,20 @@ class SearchActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_search)
         initViewModel()
         initViews()
-        setNetworkCallBack()
+        networkConnectionCheck = NetworkConnectionCheck(this,viewModel)
         setViewPagerAdapter(supportFragmentManager)
         setSearchView(binding.searchviewMain)
         setSearchTermRecyclerView()
     }
 
-    // TODO : Network handling logic
-    private fun setNetworkCallBack() {
+    override fun onResume() {
+        super.onResume()
+        networkConnectionCheck.registerNetworkCallback()
+    }
 
+    override fun onStop() {
+        super.onStop()
+        networkConnectionCheck.terminateNetworkCallback()
     }
 
     private fun initViewModel() {
@@ -81,8 +87,10 @@ class SearchActivity : AppCompatActivity() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 viewModel.keyword.value = query!!
-                search()
-                viewModel.insertRecentSearchTermToAppDatabase()
+                if(viewModel.networkChecked) { // 네트워크가 available 한 상태라면!
+                    viewModel.insertRecentSearchTermToAppDatabase()
+                    search()
+                }
                 return true
             }
 

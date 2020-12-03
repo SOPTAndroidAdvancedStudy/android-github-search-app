@@ -1,6 +1,7 @@
 package com.siba.searchmvvmpractice.remote.model.repository
 
 import com.google.gson.annotations.SerializedName
+import com.siba.searchmvvmpractice.domain.DomainRepository
 import com.siba.searchmvvmpractice.local.entity.DatabaseGithubRepositoryInfo
 
 data class UserRepositoryCatalog(
@@ -15,6 +16,15 @@ data class UserRepositoryCatalog(
 fun UserRepositoryCatalog.asDatabaseModel() : List<DatabaseGithubRepositoryInfo>{
         return repository.map {
                 DatabaseGithubRepositoryInfo(
+                        full_name = it.full_name,
+                        html_url = it.html_url
+                )
+        }
+}
+
+fun UserRepositoryCatalog.asDomainModel() : List<DomainRepository>{
+        return repository.map {
+                DomainRepository(
                         full_name = it.full_name,
                         html_url = it.html_url
                 )

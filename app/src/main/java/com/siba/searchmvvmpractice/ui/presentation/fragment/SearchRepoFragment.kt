@@ -47,11 +47,9 @@ class SearchRepoFragment : Fragment() {
     }
 
     private fun setAdapterData(){
-        viewModel.keyword.observe(viewLifecycleOwner){
-            viewModel.fetchGithubRepositoryFromAppDatabase(it).observe(viewLifecycleOwner){data ->
-                repoAdapter.data = data as MutableList<DomainRepository>
-                repoAdapter.notifyDataSetChanged()
-            }
+        viewModel.fetchGithubRepositoryFromAppDatabase(viewModel.keyword.value.toString()).observe(viewLifecycleOwner){
+            repoAdapter.data = it as MutableList<DomainRepository>
+            repoAdapter.notifyDataSetChanged()
         }
     }
 

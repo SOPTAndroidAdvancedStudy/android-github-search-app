@@ -45,6 +45,7 @@ class SearchRepository(
     }
 
     // Fixme: 여기 로직 문제 있음 , fetchUser(keyword)가 이미 네트워킹이 되는 상태라서 네트워크상태에서 AppDatabase에 넣는다는게 이상함.
+    // 아니지 맞지 훈기야. 네트워킹이 되었을 떄만! AppDatabase에 데이터를 넣어놓을 수 있는거지
     suspend fun insertGithubUserToAppDatabase(keyword: String) =
         searchDao.insertGithubUser(fetchUser(keyword).asDatabaseModel())
 

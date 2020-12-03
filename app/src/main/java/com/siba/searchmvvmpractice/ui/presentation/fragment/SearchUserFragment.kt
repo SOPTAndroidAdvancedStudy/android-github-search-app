@@ -46,14 +46,12 @@ class SearchUserFragment : Fragment() {
         }
     }
 
-    private fun setAdapterData(){
-        // 여기 부분 수정
-        viewModel.keyword.observe(viewLifecycleOwner){
-           viewModel.fetchGithubUserFromAppDatabase(it).observe(viewLifecycleOwner){data ->
-               userAdapter.data = data as MutableList<DomainUsers>
-               userAdapter.notifyDataSetChanged()
-           }
-        }
+    private fun setAdapterData() {
+        viewModel.fetchGithubUserFromAppDatabase(viewModel.keyword.value.toString())
+            .observe(viewLifecycleOwner) {
+                userAdapter.data = it as MutableList<DomainUsers>
+                userAdapter.notifyDataSetChanged()
+            }
     }
 
 }

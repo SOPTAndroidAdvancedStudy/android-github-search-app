@@ -1,6 +1,7 @@
 package com.siba.searchmvvmpractice.remote.model.user
 
 import com.google.gson.annotations.SerializedName
+import com.siba.searchmvvmpractice.domain.DomainUsers
 import com.siba.searchmvvmpractice.local.entity.DatabaseGithubUserInfo
 
 data class UserCatalog(
@@ -15,6 +16,15 @@ data class UserCatalog(
 fun UserCatalog.asDatabaseModel() : List<DatabaseGithubUserInfo>{
     return users.map {
         DatabaseGithubUserInfo(
+            login = it.login,
+            url = it.url
+        )
+    }
+}
+
+fun UserCatalog.asDomainModel() : List<DomainUsers>{
+    return users.map {
+        DomainUsers(
             login = it.login,
             url = it.url
         )
