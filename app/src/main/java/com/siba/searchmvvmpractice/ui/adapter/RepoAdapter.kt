@@ -8,10 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.siba.searchmvvmpractice.BR
 import com.siba.searchmvvmpractice.R
 import com.siba.searchmvvmpractice.databinding.RepoItemBinding
-import com.siba.searchmvvmpractice.remote.model.Repository
+import com.siba.searchmvvmpractice.domain.DomainRepository
 
 class RepoAdapter<B : RepoItemBinding> : RecyclerView.Adapter<RepoAdapter<B>.RepoViewHolder<B>>() {
-    var data = mutableListOf<Repository>()
+    var data = mutableListOf<DomainRepository>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoViewHolder<B> =
         RepoViewHolder<B>(
             LayoutInflater.from(parent.context).inflate(R.layout.repo_item, parent, false)
@@ -26,7 +26,7 @@ class RepoAdapter<B : RepoItemBinding> : RecyclerView.Adapter<RepoAdapter<B>.Rep
     inner class RepoViewHolder<B : RepoItemBinding>(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
         private val binding: B = DataBindingUtil.bind(itemView)!!
-        fun bind(userRepository: Repository) {
+        fun bind(userRepository: DomainRepository) {
             binding.setVariable(BR.userRepository, userRepository)
         }
     }
