@@ -11,17 +11,17 @@ import com.siba.searchmvvmpractice.repository.SearchRepository
 import kotlinx.coroutines.launch
 
 class SearchViewModel(
-        private val repository: SearchRepository
+    private val repository: SearchRepository
 ) : ViewModel() {
-    var networkChecked : Boolean = false
+    var networkChecked: Boolean = false
 
     private val _keyword = MutableLiveData<String>()
     val keyword: MutableLiveData<String>
         get() = _keyword
 
-
     // RecentSearchTerm
     var allRecentSearchTerm: LiveData<List<RecentSearchTerm>> = repository.getAllSearchTerm()
+
 
     fun insertRecentSearchTermToAppDatabase() = viewModelScope.launch {
         val recentSearchTerm = RecentSearchTerm(keyword = _keyword.value.toString())
@@ -36,7 +36,7 @@ class SearchViewModel(
     }
 
     // this function use Network connect state is off
-    fun fetchGithubUserFromAppDatabase(keyword : String): LiveData<List<DomainUsers>> {
+    fun fetchGithubUserFromAppDatabase(keyword: String): LiveData<List<DomainUsers>> {
         return repository.fetchDatabaseGithubUser(keyword)
     }
 
@@ -48,9 +48,8 @@ class SearchViewModel(
     }
 
     // this function use Network connect state is off
-    fun fetchGithubRepositoryFromAppDatabase(keyword : String) : LiveData<List<DomainRepository>>{
+    fun fetchGithubRepositoryFromAppDatabase(keyword: String): LiveData<List<DomainRepository>> {
         return repository.fetchDatabaseGithubRepository(keyword)
     }
-
 
 }

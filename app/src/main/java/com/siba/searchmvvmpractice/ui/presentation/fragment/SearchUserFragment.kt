@@ -47,11 +47,13 @@ class SearchUserFragment : Fragment() {
     }
 
     private fun setAdapterData() {
-        viewModel.fetchGithubUserFromAppDatabase(viewModel.keyword.value.toString())
-            .observe(viewLifecycleOwner) {
-                userAdapter.data = it as MutableList<DomainUsers>
+        // 여기 로직이 쓰레기 , 좋은 형태로 좀 바꿨으면 싶은데 생각이 안남 :(
+        viewModel.keyword.observe(viewLifecycleOwner){
+            viewModel.fetchGithubUserFromAppDatabase(it).observe(viewLifecycleOwner){data ->
+                userAdapter.data = data as MutableList<DomainUsers>
                 userAdapter.notifyDataSetChanged()
             }
+        }
     }
 
 }

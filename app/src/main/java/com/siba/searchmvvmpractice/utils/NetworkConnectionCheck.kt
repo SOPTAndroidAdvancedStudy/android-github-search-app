@@ -20,7 +20,6 @@ class NetworkConnectionCheck(
 ) : ConnectivityManager.NetworkCallback(), LifecycleOwner {
     override fun onAvailable(network: Network) {
         super.onAvailable(network)
-        // TODO: 여기 network가 Checking이 되었는지 안되어있는지에 대한 알고리즘은 다시 한번 생각
         // 기존에 WIFI를 끊어놓고 앱을 시작하게 되면 onLost가 check되지 않아 networkChecked가 true로 된다
         viewModel.networkChecked = true
         Toast.makeText(context, "Network is Available + ${viewModel.networkChecked}", Toast.LENGTH_SHORT).show()
