@@ -1,7 +1,7 @@
 package com.siba.searchmvvmpractice.remote
 
-import com.siba.searchmvvmpractice.remote.model.UserCatalog
-import com.siba.searchmvvmpractice.remote.model.UserRepositoryCatalog
+import com.siba.searchmvvmpractice.remote.model.repository.UserRepositoryCatalog
+import com.siba.searchmvvmpractice.remote.model.user.UserCatalog
 import retrofit2.http.GET
 import retrofit2.http.Query
 

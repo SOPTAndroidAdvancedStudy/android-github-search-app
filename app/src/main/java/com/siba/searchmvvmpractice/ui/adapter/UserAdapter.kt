@@ -8,10 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.siba.searchmvvmpractice.BR
 import com.siba.searchmvvmpractice.R
 import com.siba.searchmvvmpractice.databinding.UserItemBinding
-import com.siba.searchmvvmpractice.remote.model.Users
+import com.siba.searchmvvmpractice.domain.DomainUsers
 
 class UserAdapter<B : UserItemBinding> : RecyclerView.Adapter<UserAdapter<B>.UserViewHolder<B>>() {
-    var data = mutableListOf<Users>()
+    var data = mutableListOf<DomainUsers>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder<B> =
         UserViewHolder<B>(
             LayoutInflater.from(parent.context).inflate(R.layout.user_item, parent, false)
@@ -26,7 +26,7 @@ class UserAdapter<B : UserItemBinding> : RecyclerView.Adapter<UserAdapter<B>.Use
     inner class UserViewHolder<B : UserItemBinding>(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
         private val binding: B = DataBindingUtil.bind(itemView)!!
-        fun bind(users: Users) {
+        fun bind(users: DomainUsers) {
             binding.setVariable(BR.users, users)
         }
     }
