@@ -1,11 +1,11 @@
 package com.siba.searchmvvmpractice.ui.presentation.activity
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.siba.searchmvvmpractice.R
@@ -20,16 +20,16 @@ import com.siba.searchmvvmpractice.utils.NetworkConnectionCheck
 class SearchActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySearchBinding
-    private lateinit var viewModel: SearchViewModel
+    // ViewModel by로 한다음에 람다식으로 viewModel 선언해놓는 것으로 생각하는게 좋겠다.
+    private val viewModel: SearchViewModel by viewModels { Injection.provideSearchViewModelFactory(this)  }
     private lateinit var networkConnectionCheck: NetworkConnectionCheck
     private lateinit var searchTermAdapter: SearchTermAdapter<SearchTermItemBinding>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_search)
-        initViewModel()
         initViews()
-        networkConnectionCheck = NetworkConnectionCheck(this,viewModel)
+        networkConnectionCheck = NetworkConnectionCheck(this, viewModel)
         setViewPagerAdapter(supportFragmentManager)
         setSearchView(binding.searchviewMain)
         setSearchTermRecyclerView()
@@ -43,12 +43,6 @@ class SearchActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         networkConnectionCheck.terminateNetworkCallback()
-    }
-
-    private fun initViewModel() {
-        viewModel = ViewModelProvider(this@SearchActivity, Injection.provideSearchViewModelFactory(this)).get(
-            SearchViewModel::class.java
-        )
     }
 
     private fun initViews() {
@@ -87,7 +81,7 @@ class SearchActivity : AppCompatActivity() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 viewModel.keyword.value = query!!
-                if(viewModel.networkChecked) { // 네트워크가 available 한 상태라면!
+                if (viewModel.networkChecked) {
                     viewModel.insertRecentSearchTermToAppDatabase()
                     search()
                 }
@@ -103,8 +97,7 @@ class SearchActivity : AppCompatActivity() {
     private fun search() {
         if (binding.tabMain.selectedTabPosition == 0) {
             viewModel.insertGithubUserToAppDatabase()
-        }
-        else {
+        } else {
             viewModel.insertGithubRepositoryToAppDatabase()
         }
     }
