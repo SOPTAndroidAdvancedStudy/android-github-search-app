@@ -1,6 +1,6 @@
 package com.siba.searchmvvmpractice.remote.api
 
-import com.siba.searchmvvmpractice.remote.RetrofitService
+import com.siba.searchmvvmpractice.api.GithubService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -14,6 +14,6 @@ object RetrofitBuilder {
                 .build()
     }
 
-    val retrofitService: RetrofitService = getRetrofit().create(RetrofitService::class.java)
+    val GITHUB_SERVICE: GithubService = getRetrofit().create(GithubService::class.java)
 
 }

@@ -8,20 +8,20 @@ import com.siba.searchmvvmpractice.local.dao.SearchDao
 import com.siba.searchmvvmpractice.local.entity.RecentSearchTerm
 import com.siba.searchmvvmpractice.local.entity.asDomainRepository
 import com.siba.searchmvvmpractice.local.entity.asDomainUsers
-import com.siba.searchmvvmpractice.remote.RetrofitService
+import com.siba.searchmvvmpractice.api.GithubService
 import com.siba.searchmvvmpractice.remote.model.repository.UserRepositoryCatalog
 import com.siba.searchmvvmpractice.remote.model.repository.asDatabaseModel
 import com.siba.searchmvvmpractice.remote.model.user.UserCatalog
 import com.siba.searchmvvmpractice.remote.model.user.asDatabaseModel
 
 class SearchRepository(
-    private val retrofitService: RetrofitService,
+    private val githubService: GithubService,
     private val searchDao: SearchDao
 ) {
-    private suspend fun fetchUser(userName: String): UserCatalog = retrofitService.getUsers(userName)
+    private suspend fun fetchUser(userName: String): UserCatalog = githubService.getUsers(userName)
 
     private suspend fun fetchRepository(repositoryName: String): UserRepositoryCatalog =
-        retrofitService.getRepositories(repositoryName)
+        githubService.getRepositories(repositoryName)
 
     suspend fun insertRecentSearchTerm(recentSearchTerm: RecentSearchTerm) {
         searchDao.insertRecentSearchTerm(recentSearchTerm)
