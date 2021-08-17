@@ -4,20 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.siba.searchmvvmpractice.R
 import com.siba.searchmvvmpractice.databinding.FragmentSearchUserBinding
 import com.siba.searchmvvmpractice.databinding.UserItemBinding
 import com.siba.searchmvvmpractice.domain.DomainUsers
 import com.siba.searchmvvmpractice.ui.adapter.UserAdapter
 import com.siba.searchmvvmpractice.ui.viewmodel.SearchViewModel
+import com.siba.searchmvvmpractice.utils.autoCleared
 
 class SearchUserFragment : Fragment() {
-    private lateinit var binding: FragmentSearchUserBinding
+    private var binding by autoCleared<FragmentSearchUserBinding>()
 
     private val viewModel: SearchViewModel by activityViewModels()
     private lateinit var userAdapter: UserAdapter<UserItemBinding>
@@ -25,20 +24,19 @@ class SearchUserFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search_user, container, false)
-        binding.viewModel = viewModel
-        return binding.root
-    }
+    ): View = FragmentSearchUserBinding.inflate(inflater,container,false).also { FragmentSearchUserBinding ->
+        binding = FragmentSearchUserBinding
+    }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         userAdapter = UserAdapter()
-        setAdapter()
+        configAdapter()
         setAdapterData()
     }
 
-    private fun setAdapter() {
+    private fun configAdapter() {
         binding.searchUserRecyclerview.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = userAdapter

@@ -1,6 +1,5 @@
-package com.siba.searchmvvmpractice.remote.api
+package com.siba.searchmvvmpractice.api
 
-import com.siba.searchmvvmpractice.api.GithubService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

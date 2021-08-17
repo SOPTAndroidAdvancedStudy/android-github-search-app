@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import com.siba.searchmvvmpractice.local.database.AppDatabase
 import com.siba.searchmvvmpractice.api.GithubService
-import com.siba.searchmvvmpractice.remote.api.RetrofitBuilder
+import com.siba.searchmvvmpractice.api.RetrofitBuilder
 import com.siba.searchmvvmpractice.repository.SearchRepository
 import com.siba.searchmvvmpractice.ui.factory.SearchViewModelFactory
 

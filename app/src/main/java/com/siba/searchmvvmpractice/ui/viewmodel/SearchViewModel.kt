@@ -11,36 +11,33 @@ import com.siba.searchmvvmpractice.repository.SearchRepository
 import kotlinx.coroutines.launch
 
 class SearchViewModel(
-    private val repository: SearchRepository
+    private val searchRepository: SearchRepository
 ) : ViewModel() {
 
-    var networkChecked: Boolean = false
+    // two-way DataBinding
+    val keyword = MutableLiveData<String>()
 
-    private val _keyword = MutableLiveData<String>()
-    val keyword: MutableLiveData<String>
-        get() = _keyword
-
-    var allRecentSearchTerm: LiveData<List<RecentSearchTerm>> = repository.getAllSearchTerm()
+    var allRecentSearchTerm: LiveData<List<RecentSearchTerm>> = searchRepository.getAllSearchTerm()
 
     fun insertRecentSearchTermToAppDatabase() = viewModelScope.launch {
-        val recentSearchTerm = RecentSearchTerm(keyword = _keyword.value.toString())
-        repository.insertRecentSearchTerm(recentSearchTerm)
+        val recentSearchTerm = RecentSearchTerm(keyword = keyword.value.toString())
+        searchRepository.insertRecentSearchTerm(recentSearchTerm)
     }
 
     fun insertGithubUserToAppDatabase() = viewModelScope.launch {
-        repository.insertGithubUserToAppDatabase(_keyword.value.toString())
+        searchRepository.insertGithubUserToAppDatabase(keyword.value.toString())
     }
 
     fun fetchGithubUserFromAppDatabase(keyword: String): LiveData<List<DomainUsers>> {
-        return repository.fetchDatabaseGithubUser(keyword)
+        return searchRepository.fetchDatabaseGithubUser(keyword)
     }
 
     fun insertGithubRepositoryToAppDatabase() = viewModelScope.launch {
-        repository.insertGithubRepositoryToAppDatabase(_keyword.value.toString())
+        searchRepository.insertGithubRepositoryToAppDatabase(keyword.value.toString())
     }
 
     fun fetchGithubRepositoryFromAppDatabase(keyword: String): LiveData<List<DomainRepository>> {
-        return repository.fetchDatabaseGithubRepository(keyword)
+        return searchRepository.fetchDatabaseGithubRepository(keyword)
     }
 
 }

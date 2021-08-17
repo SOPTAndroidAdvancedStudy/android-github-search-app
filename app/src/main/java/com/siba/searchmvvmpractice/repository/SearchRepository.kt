@@ -9,19 +9,22 @@ import com.siba.searchmvvmpractice.local.entity.RecentSearchTerm
 import com.siba.searchmvvmpractice.local.entity.asDomainRepository
 import com.siba.searchmvvmpractice.local.entity.asDomainUsers
 import com.siba.searchmvvmpractice.api.GithubService
-import com.siba.searchmvvmpractice.remote.model.repository.UserRepositoryCatalog
-import com.siba.searchmvvmpractice.remote.model.repository.asDatabaseModel
-import com.siba.searchmvvmpractice.remote.model.user.UserCatalog
-import com.siba.searchmvvmpractice.remote.model.user.asDatabaseModel
+import com.siba.searchmvvmpractice.api.model.repository.UserRepositoryCatalog
+import com.siba.searchmvvmpractice.api.model.repository.asDatabaseModel
+import com.siba.searchmvvmpractice.api.model.user.UserCatalog
+import com.siba.searchmvvmpractice.api.model.user.asDatabaseModel
+import com.siba.searchmvvmpractice.application.AppExecutors
+import com.siba.searchmvvmpractice.vo.Repo
+import com.siba.searchmvvmpractice.vo.RepoSearchResponse
+import com.siba.searchmvvmpractice.vo.RepoSearchResult
+import com.siba.searchmvvmpractice.vo.Resource
 
 class SearchRepository(
+    private val appExecutors : AppExecutors,
     private val githubService: GithubService,
-    private val searchDao: SearchDao
+    private val searchDao: SearchDao,
 ) {
-    private suspend fun fetchUser(userName: String): UserCatalog = githubService.getUsers(userName)
-
-    private suspend fun fetchRepository(repositoryName: String): UserRepositoryCatalog =
-        githubService.getRepositories(repositoryName)
+    suspend fun fetchUser(userName: String): UserCatalog = githubService.getUsers(userName)
 
     suspend fun insertRecentSearchTerm(recentSearchTerm: RecentSearchTerm) {
         searchDao.insertRecentSearchTerm(recentSearchTerm)

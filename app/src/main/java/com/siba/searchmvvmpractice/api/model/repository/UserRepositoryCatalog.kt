@@ -1,4 +1,4 @@
-package com.siba.searchmvvmpractice.remote.model.repository
+package com.siba.searchmvvmpractice.api.model.repository
 
 import com.google.gson.annotations.SerializedName
 import com.siba.searchmvvmpractice.domain.DomainRepository

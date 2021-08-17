@@ -1,4 +1,4 @@
-package com.siba.searchmvvmpractice.remote.model.user
+package com.siba.searchmvvmpractice.api.model.user
 
 import com.google.gson.annotations.SerializedName
 import com.siba.searchmvvmpractice.domain.DomainUsers
