@@ -4,6 +4,9 @@ import android.util.Log
 import androidx.room.TypeConverter
 
 object GithubTypeConverters {
+    /**
+     * TypeConverter
+     */
     @TypeConverter
     @JvmStatic
     fun stringToIntList(data : String?) : List<Int>? {

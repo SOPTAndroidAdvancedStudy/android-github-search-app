@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.TypeConverters
 import com.siba.searchmvvmpractice.local.GithubTypeConverters
 
-@Entity(primaryKeys = ["querys"])
+@Entity(primaryKeys = ["query"])
 @TypeConverters(GithubTypeConverters::class)
 data class RepoSearchResult(
     val query : String,
