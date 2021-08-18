@@ -13,5 +13,4 @@ class UserRepository @Inject constructor(
     private val githubService: GithubService
 ){
 
-
 }

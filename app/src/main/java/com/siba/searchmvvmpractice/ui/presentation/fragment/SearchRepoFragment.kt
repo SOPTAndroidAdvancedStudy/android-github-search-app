@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.siba.searchmvvmpractice.databinding.FragmentSearchRepoBinding
-import com.siba.searchmvvmpractice.databinding.RepoItemBinding
 import com.siba.searchmvvmpractice.di.DaggerAppComponent
 import com.siba.searchmvvmpractice.ui.adapter.RepoAdapter
 import com.siba.searchmvvmpractice.ui.viewmodel.RepoViewModel
@@ -27,7 +26,7 @@ class SearchRepoFragment : Fragment() {
         viewModelFactory
     }
 
-    private lateinit var repoAdapter: RepoAdapter<RepoItemBinding>
+    private var repoAdapter by autoCleared<RepoAdapter>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -1,33 +1,36 @@
 package com.siba.searchmvvmpractice.ui.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.siba.searchmvvmpractice.BR
-import com.siba.searchmvvmpractice.R
 import com.siba.searchmvvmpractice.databinding.RepoItemBinding
 import com.siba.searchmvvmpractice.domain.DomainRepository
 
-class RepoAdapter<B : RepoItemBinding> : RecyclerView.Adapter<RepoAdapter<B>.RepoViewHolder<B>>() {
-    var data = mutableListOf<DomainRepository>()
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoViewHolder<B> =
-        RepoViewHolder<B>(
-            LayoutInflater.from(parent.context).inflate(R.layout.repo_item, parent, false)
-        )
+class RepoAdapter : RecyclerView.Adapter<RepoAdapter.RepoViewHolder>() {
+    private val items = mutableListOf<DomainRepository>()
 
-    override fun onBindViewHolder(holder: RepoViewHolder<B>, position: Int) {
-        holder.bind(data[position])
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoViewHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = RepoItemBinding.inflate(layoutInflater, parent, false)
+        return RepoViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = data.size
+    override fun onBindViewHolder(holder: RepoViewHolder, position: Int) {
+        holder.bind(items[position])
+    }
 
-    inner class RepoViewHolder<B : RepoItemBinding>(itemView: View) :
-        RecyclerView.ViewHolder(itemView) {
-        private val binding: B = DataBindingUtil.bind(itemView)!!
+    override fun getItemCount(): Int = items.size
+
+    fun submitList(list: List<DomainRepository>) {
+        items.clear()
+        items.addAll(list)
+        notifyDataSetChanged()
+    }
+
+    inner class RepoViewHolder(private val binding: RepoItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(userRepository: DomainRepository) {
-            binding.setVariable(BR.userRepository, userRepository)
+            binding.userRepository = userRepository
         }
     }
 

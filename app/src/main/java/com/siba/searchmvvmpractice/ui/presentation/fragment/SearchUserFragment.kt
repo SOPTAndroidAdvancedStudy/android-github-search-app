@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.siba.searchmvvmpractice.databinding.FragmentSearchUserBinding
-import com.siba.searchmvvmpractice.databinding.UserItemBinding
 import com.siba.searchmvvmpractice.di.DaggerAppComponent
 import com.siba.searchmvvmpractice.ui.adapter.UserAdapter
 import com.siba.searchmvvmpractice.ui.viewmodel.UserViewModel
@@ -27,7 +26,7 @@ class SearchUserFragment : Fragment() {
         viewModelFactory
     }
 
-    private lateinit var userAdapter: UserAdapter<UserItemBinding>
+    private var userAdapter by autoCleared<UserAdapter>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

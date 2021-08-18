@@ -1,33 +1,36 @@
 package com.siba.searchmvvmpractice.ui.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.siba.searchmvvmpractice.BR
-import com.siba.searchmvvmpractice.R
 import com.siba.searchmvvmpractice.databinding.UserItemBinding
 import com.siba.searchmvvmpractice.domain.DomainUsers
 
-class UserAdapter<B : UserItemBinding> : RecyclerView.Adapter<UserAdapter<B>.UserViewHolder<B>>() {
-    var data = mutableListOf<DomainUsers>()
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder<B> =
-        UserViewHolder<B>(
-            LayoutInflater.from(parent.context).inflate(R.layout.user_item, parent, false)
-        )
+class UserAdapter : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+    private val items = mutableListOf<DomainUsers>()
 
-    override fun onBindViewHolder(holder: UserViewHolder<B>, position: Int) {
-        holder.bind(data[position])
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = UserItemBinding.inflate(layoutInflater, parent, false)
+        return UserViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = data.size
+    override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
+        holder.bind(items[position])
+    }
 
-    inner class UserViewHolder<B : UserItemBinding>(itemView: View) :
-        RecyclerView.ViewHolder(itemView) {
-        private val binding: B = DataBindingUtil.bind(itemView)!!
+    override fun getItemCount(): Int = items.size
+
+    fun submitList(list: List<DomainUsers>) {
+        items.clear()
+        items.addAll(list)
+        notifyDataSetChanged()
+    }
+
+    inner class UserViewHolder(private val binding: UserItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(users: DomainUsers) {
-            binding.setVariable(BR.users, users)
+            binding.users = users
         }
     }
 
