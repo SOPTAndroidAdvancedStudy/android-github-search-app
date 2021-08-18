@@ -36,5 +36,4 @@ class GithubViewModelFactory @Inject constructor(
         @Suppress("UNCHECKED_CAST")
         return creator.get() as T
     }
-
 }
