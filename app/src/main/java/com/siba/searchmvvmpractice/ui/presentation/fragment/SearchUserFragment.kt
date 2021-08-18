@@ -5,20 +5,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.siba.searchmvvmpractice.databinding.FragmentSearchUserBinding
 import com.siba.searchmvvmpractice.databinding.UserItemBinding
-import com.siba.searchmvvmpractice.domain.DomainUsers
+import com.siba.searchmvvmpractice.di.DaggerAppComponent
 import com.siba.searchmvvmpractice.ui.adapter.UserAdapter
-import com.siba.searchmvvmpractice.ui.viewmodel.SearchViewModel
+import com.siba.searchmvvmpractice.ui.viewmodel.UserViewModel
 import com.siba.searchmvvmpractice.utils.autoCleared
+import javax.inject.Inject
 
 class SearchUserFragment : Fragment() {
     private var binding by autoCleared<FragmentSearchUserBinding>()
 
-    private val viewModel: SearchViewModel by activityViewModels()
+    @Inject
+    lateinit var viewModelFactory : ViewModelProvider.Factory
+
+    private val viewModel: UserViewModel by viewModels {
+        viewModelFactory
+    }
+
     private lateinit var userAdapter: UserAdapter<UserItemBinding>
 
     override fun onCreateView(
@@ -26,6 +34,7 @@ class SearchUserFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View = FragmentSearchUserBinding.inflate(inflater,container,false).also { FragmentSearchUserBinding ->
         binding = FragmentSearchUserBinding
+        DaggerAppComponent.builder().application(requireActivity().application).build().fragmentComponent().create().inject(this)
     }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -33,7 +42,6 @@ class SearchUserFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         userAdapter = UserAdapter()
         configAdapter()
-        setAdapterData()
     }
 
     private fun configAdapter() {
@@ -44,14 +52,5 @@ class SearchUserFragment : Fragment() {
         }
     }
 
-    private fun setAdapterData() {
-        // 여기 로직이 쓰레기 , 좋은 형태로 좀 바꿨으면 싶은데 생각이 안남 :(
-        viewModel.keyword.observe(viewLifecycleOwner){
-            viewModel.fetchGithubUserFromAppDatabase(it).observe(viewLifecycleOwner){data ->
-                userAdapter.data = data as MutableList<DomainUsers>
-                userAdapter.notifyDataSetChanged()
-            }
-        }
-    }
 
 }

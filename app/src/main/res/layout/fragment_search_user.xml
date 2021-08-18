@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.siba.searchmvvmpractice.ui.viewmodel.SearchViewModel" />
+            type="com.siba.searchmvvmpractice.ui.viewmodel.UserViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

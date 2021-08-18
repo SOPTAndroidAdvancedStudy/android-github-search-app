@@ -3,7 +3,6 @@ package com.siba.searchmvvmpractice.ui.adapter
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.siba.searchmvvmpractice.R
@@ -43,9 +42,10 @@ class SearchTermAdapter :
     }
 }
 
+/*
 @BindingAdapter("search_term_item")
 fun RecyclerView.setItems(items: List<RecentSearchTerm>) {
     (adapter as? SearchTermAdapter)?.run {
         submitList(items)
     }
-}
+}*/

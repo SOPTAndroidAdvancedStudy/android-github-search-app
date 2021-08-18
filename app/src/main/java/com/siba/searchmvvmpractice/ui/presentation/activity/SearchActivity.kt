@@ -5,24 +5,33 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.siba.searchmvvmpractice.R
 import com.siba.searchmvvmpractice.databinding.ActivitySearchBinding
-import com.siba.searchmvvmpractice.injection.Injection
+import com.siba.searchmvvmpractice.di.DaggerAppComponent
 import com.siba.searchmvvmpractice.ui.adapter.SearchTermAdapter
 import com.siba.searchmvvmpractice.ui.adapter.ViewPagerAdapter
 import com.siba.searchmvvmpractice.ui.viewmodel.SearchViewModel
+import javax.inject.Inject
 
 class SearchActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySearchBinding
 
-    private val viewModel: SearchViewModel by viewModels { Injection.provideSearchViewModelFactory(this)  }
+    @Inject
+    lateinit var viewModelFactory : ViewModelProvider.Factory
+
+    val viewModel : SearchViewModel by viewModels {
+        viewModelFactory
+    }
 
     private lateinit var searchTermAdapter: SearchTermAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        DaggerAppComponent.builder().application(application).build().inject(this)
+
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_search)
         searchTermAdapter = SearchTermAdapter()

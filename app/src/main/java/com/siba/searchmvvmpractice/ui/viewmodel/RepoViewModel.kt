@@ -1,6 +1,9 @@
 package com.siba.searchmvvmpractice.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
+import javax.inject.Inject
 
-class RepoViewModel : ViewModel() {
+class RepoViewModel @Inject constructor(
+
+) : ViewModel() {
 }

@@ -9,8 +9,9 @@ import com.siba.searchmvvmpractice.domain.DomainUsers
 import com.siba.searchmvvmpractice.local.entity.RecentSearchTerm
 import com.siba.searchmvvmpractice.repository.SearchRepository
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SearchViewModel(
+class SearchViewModel @Inject constructor(
     private val searchRepository: SearchRepository
 ) : ViewModel() {
 

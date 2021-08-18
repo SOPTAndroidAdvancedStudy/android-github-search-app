@@ -30,7 +30,6 @@
             android:layout_height="100dp"
             android:background="@color/white"
             android:elevation="4dp"
-            search_term_item="@{searchViewModel.allRecentSearchTerm}"
             app:layout_constraintTop_toBottomOf="@+id/searchview_main" />
 
         <com.google.android.material.tabs.TabLayout

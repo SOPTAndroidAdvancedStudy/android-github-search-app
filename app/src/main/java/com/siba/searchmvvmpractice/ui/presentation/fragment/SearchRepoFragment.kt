@@ -5,20 +5,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.siba.searchmvvmpractice.databinding.FragmentSearchRepoBinding
 import com.siba.searchmvvmpractice.databinding.RepoItemBinding
-import com.siba.searchmvvmpractice.domain.DomainRepository
+import com.siba.searchmvvmpractice.di.DaggerAppComponent
 import com.siba.searchmvvmpractice.ui.adapter.RepoAdapter
-import com.siba.searchmvvmpractice.ui.viewmodel.SearchViewModel
+import com.siba.searchmvvmpractice.ui.viewmodel.RepoViewModel
 import com.siba.searchmvvmpractice.utils.autoCleared
+import javax.inject.Inject
 
 class SearchRepoFragment : Fragment() {
     private var binding by autoCleared<FragmentSearchRepoBinding>()
 
-    private val viewModel: SearchViewModel by activityViewModels()
+    @Inject
+    lateinit var viewModelFactory : ViewModelProvider.Factory
+
+    private val viewModel: RepoViewModel by viewModels {
+        viewModelFactory
+    }
+
     private lateinit var repoAdapter: RepoAdapter<RepoItemBinding>
 
     override fun onCreateView(
@@ -26,6 +34,7 @@ class SearchRepoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View = FragmentSearchRepoBinding.inflate(inflater,container,false).also { FragmentSearchRepoBinding ->
         binding = FragmentSearchRepoBinding
+        DaggerAppComponent.builder().application(requireActivity().application).build().fragmentComponent().create().inject(this)
     }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -33,7 +42,6 @@ class SearchRepoFragment : Fragment() {
         binding.viewModel = viewModel
         repoAdapter = RepoAdapter()
         configAdapter()
-        setAdapterData()
     }
 
     private fun configAdapter() {
@@ -44,16 +52,5 @@ class SearchRepoFragment : Fragment() {
         }
     }
 
-    /**
-     * TODO : 로직 교체 해야함
-     */
-    private fun setAdapterData(){
-        viewModel.keyword.observe(viewLifecycleOwner){
-            viewModel.fetchGithubRepositoryFromAppDatabase(it).observe(viewLifecycleOwner){data ->
-                repoAdapter.data = data as MutableList<DomainRepository>
-                repoAdapter.notifyDataSetChanged()
-            }
-        }
-    }
 
 }
