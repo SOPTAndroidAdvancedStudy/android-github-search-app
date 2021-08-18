@@ -9,12 +9,12 @@ import com.siba.searchmvvmpractice.domain.DomainRepository
 data class DatabaseGithubRepositoryInfo(
     @PrimaryKey
     @ColumnInfo(name = "full_name")
-    val full_name : String,
+    val full_name: String,
     @ColumnInfo(name = "html_url")
     val html_url: String
 )
 
-fun List<DatabaseGithubRepositoryInfo>.asDomainRepository() : List<DomainRepository>{
+fun List<DatabaseGithubRepositoryInfo>.asDomainRepository(): List<DomainRepository> {
     return map {
         DomainRepository(
             full_name = it.full_name,

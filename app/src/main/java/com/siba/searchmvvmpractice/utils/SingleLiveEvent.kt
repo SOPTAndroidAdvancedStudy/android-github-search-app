@@ -13,12 +13,12 @@ class SingleLiveEvent<T> : MutableLiveData<T>() {
     private val pending = AtomicBoolean(false)
 
     override fun observe(owner: LifecycleOwner, observer: Observer<in T>) {
-        if(hasActiveObservers()){
-            Log.w(TAG,"Mutiple observers regustered but only one will be notified of changes.")
+        if (hasActiveObservers()) {
+            Log.w(TAG, "Mutiple observers regustered but only one will be notified of changes.")
         }
         // Observe the internal MutableLiveData
-        super.observe(owner){
-            if(pending.compareAndSet(true,false)){
+        super.observe(owner) {
+            if (pending.compareAndSet(true, false)) {
                 observer.onChanged(it)
             }
         }

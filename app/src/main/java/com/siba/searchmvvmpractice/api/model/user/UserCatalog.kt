@@ -13,7 +13,7 @@ data class UserCatalog(
     val users: List<Users>
 )
 
-fun UserCatalog.asDatabaseModel() : List<DatabaseGithubUserInfo>{
+fun UserCatalog.asDatabaseModel(): List<DatabaseGithubUserInfo> {
     return users.map {
         DatabaseGithubUserInfo(
             login = it.login,
@@ -22,7 +22,7 @@ fun UserCatalog.asDatabaseModel() : List<DatabaseGithubUserInfo>{
     }
 }
 
-fun UserCatalog.asDomainModel() : List<DomainUsers>{
+fun UserCatalog.asDomainModel(): List<DomainUsers> {
     return users.map {
         DomainUsers(
             login = it.login,

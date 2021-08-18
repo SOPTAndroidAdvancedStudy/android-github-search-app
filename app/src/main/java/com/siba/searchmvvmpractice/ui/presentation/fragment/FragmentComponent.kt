@@ -7,11 +7,11 @@ import dagger.Subcomponent
 interface FragmentComponent {
 
     @Subcomponent.Factory
-    interface Factory{
-        fun create() : FragmentComponent
+    interface Factory {
+        fun create(): FragmentComponent
     }
 
-    fun inject(activity : SearchActivity)
+    fun inject(activity: SearchActivity)
 
     fun inject(searchRepoFragment: SearchRepoFragment)
 

@@ -9,7 +9,7 @@ import com.siba.searchmvvmpractice.ui.viewmodel.SearchViewModel
 class SearchViewModelFactory(private val repository: SearchRepository) :
     ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        require(modelClass.isAssignableFrom(SearchViewModel::class.java)){"Unknown class name"}
+        require(modelClass.isAssignableFrom(SearchViewModel::class.java)) { "Unknown class name" }
         return SearchViewModel(repository) as T
     }
 

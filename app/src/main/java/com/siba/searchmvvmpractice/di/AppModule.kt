@@ -18,7 +18,7 @@ import javax.inject.Singleton
 class AppModule {
     @Singleton
     @Provides
-    fun provideGithubService() : GithubService {
+    fun provideGithubService(): GithubService {
         return Retrofit.Builder()
             .baseUrl("https://api.github.com/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -29,22 +29,22 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideDb(app : Application) : GithubDb {
+    fun provideDb(app: Application): GithubDb {
         return Room
-            .databaseBuilder(app,GithubDb::class.java,"github-db")
+            .databaseBuilder(app, GithubDb::class.java, "github-db")
             .fallbackToDestructiveMigration()
             .build()
     }
 
     @Singleton
     @Provides
-    fun provideUserDao(db : GithubDb) : UserDao = db.userDao
+    fun provideUserDao(db: GithubDb): UserDao = db.userDao
 
     @Singleton
     @Provides
-    fun provideRepoDao(db : GithubDb) : RepoDao = db.repoDao
+    fun provideRepoDao(db: GithubDb): RepoDao = db.repoDao
 
     @Singleton
     @Provides
-    fun provideSearchDao(db : GithubDb) : SearchDao = db.searchDao
+    fun provideSearchDao(db: GithubDb): SearchDao = db.searchDao
 }

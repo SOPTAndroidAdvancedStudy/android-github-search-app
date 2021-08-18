@@ -21,7 +21,7 @@ class SearchRepoFragment : Fragment() {
     private var binding by autoCleared<FragmentSearchRepoBinding>()
 
     @Inject
-    lateinit var viewModelFactory : ViewModelProvider.Factory
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private val viewModel: RepoViewModel by viewModels {
         viewModelFactory
@@ -32,10 +32,12 @@ class SearchRepoFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = FragmentSearchRepoBinding.inflate(inflater,container,false).also { FragmentSearchRepoBinding ->
-        binding = FragmentSearchRepoBinding
-        DaggerAppComponent.builder().application(requireActivity().application).build().fragmentComponent().create().inject(this)
-    }.root
+    ): View = FragmentSearchRepoBinding.inflate(inflater, container, false)
+        .also { FragmentSearchRepoBinding ->
+            binding = FragmentSearchRepoBinding
+            DaggerAppComponent.builder().application(requireActivity().application).build()
+                .fragmentComponent().create().inject(this)
+        }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.lifecycleOwner = viewLifecycleOwner

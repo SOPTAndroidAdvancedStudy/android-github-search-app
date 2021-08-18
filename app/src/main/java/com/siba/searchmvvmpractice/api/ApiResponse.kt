@@ -28,7 +28,7 @@ sealed class ApiResponse<T> {
                 }
             } else {
                 val msg = response.errorBody()?.string()
-                val errorMsg = if(msg.isNullOrEmpty()){
+                val errorMsg = if (msg.isNullOrEmpty()) {
                     response.message()
                 } else {
                     msg
@@ -48,21 +48,21 @@ data class ApiSuccessResponse<T>(
     val body: T,
     val links: Map<String, String>
 ) : ApiResponse<T>() {
-    constructor(body : T , linkHeader : String?) : this(
+    constructor(body: T, linkHeader: String?) : this(
         body = body,
         links = linkHeader?.extractLinks() ?: emptyMap()
     )
 
-    val nextPage : Int? by lazy(LazyThreadSafetyMode.NONE) {
+    val nextPage: Int? by lazy(LazyThreadSafetyMode.NONE) {
         links[NEXT_LINK]?.let { next ->
             val matcher = PAGE_PATTERN.matcher(next)
-            if(!matcher.find() || matcher.groupCount() != 1) {
+            if (!matcher.find() || matcher.groupCount() != 1) {
                 null
             } else {
-                try{
+                try {
                     Integer.parseInt(matcher.group(1)!!)
-                }catch (ex : NumberFormatException) {
-                    Log.w("cannot parse next page from %s",next)
+                } catch (ex: NumberFormatException) {
+                    Log.w("cannot parse next page from %s", next)
                     null
                 }
             }
@@ -81,9 +81,9 @@ data class ApiSuccessResponse<T>(
             val links = mutableMapOf<String, String>()
             val matcher = LINK_PATTERN.matcher(this)
 
-            while(matcher.find()){
+            while (matcher.find()) {
                 val count = matcher.groupCount()
-                if(count == 2){
+                if (count == 2) {
                     links[matcher.group(2)!!] = matcher.group(1)
                 }
             }

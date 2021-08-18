@@ -9,13 +9,13 @@ object GithubTypeConverters {
      */
     @TypeConverter
     @JvmStatic
-    fun stringToIntList(data : String?) : List<Int>? {
+    fun stringToIntList(data: String?): List<Int>? {
         return data?.let {
             it.split(",").map {
-                try{
+                try {
                     it.toInt()
-                } catch (exception : NumberFormatException) {
-                    Log.e("$exception","Cannot convert $it to number")
+                } catch (exception: NumberFormatException) {
+                    Log.e("$exception", "Cannot convert $it to number")
                 }
             }
         }?.filterNotNull()
@@ -23,7 +23,7 @@ object GithubTypeConverters {
 
     @TypeConverter
     @JvmStatic
-    fun intListToString(ints : List<Int>?) : String? {
+    fun intListToString(ints: List<Int>?): String? {
         return ints?.joinToString(",")
     }
 }

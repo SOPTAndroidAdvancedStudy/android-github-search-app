@@ -20,14 +20,14 @@ interface SearchDao {
 
     // offline Cache
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertGithubUser(users : List<DatabaseGithubUserInfo>)
+    suspend fun insertGithubUser(users: List<DatabaseGithubUserInfo>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertGithubRepository(repositories: List<DatabaseGithubRepositoryInfo>)
 
     @Query("SELECT * FROM github_user_info_table WHERE login LIKE '%' || :keyword || '%' ")
-    fun getAllGithubUser(keyword : String) : LiveData<List<DatabaseGithubUserInfo>>
+    fun getAllGithubUser(keyword: String): LiveData<List<DatabaseGithubUserInfo>>
 
     @Query("SELECT * FROM github_repository_info_table WHERE full_name LIKE '%' || :keyword || '%' ")
-    fun getAllGithubRepository(keyword : String) : LiveData<List<DatabaseGithubRepositoryInfo>>
+    fun getAllGithubRepository(keyword: String): LiveData<List<DatabaseGithubRepositoryInfo>>
 }

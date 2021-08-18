@@ -21,7 +21,7 @@ class SearchUserFragment : Fragment() {
     private var binding by autoCleared<FragmentSearchUserBinding>()
 
     @Inject
-    lateinit var viewModelFactory : ViewModelProvider.Factory
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private val viewModel: UserViewModel by viewModels {
         viewModelFactory
@@ -32,10 +32,12 @@ class SearchUserFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = FragmentSearchUserBinding.inflate(inflater,container,false).also { FragmentSearchUserBinding ->
-        binding = FragmentSearchUserBinding
-        DaggerAppComponent.builder().application(requireActivity().application).build().fragmentComponent().create().inject(this)
-    }.root
+    ): View = FragmentSearchUserBinding.inflate(inflater, container, false)
+        .also { FragmentSearchUserBinding ->
+            binding = FragmentSearchUserBinding
+            DaggerAppComponent.builder().application(requireActivity().application).build()
+                .fragmentComponent().create().inject(this)
+        }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.viewModel = viewModel

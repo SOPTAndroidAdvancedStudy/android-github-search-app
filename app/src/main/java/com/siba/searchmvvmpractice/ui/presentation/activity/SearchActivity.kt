@@ -21,9 +21,9 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySearchBinding
 
     @Inject
-    lateinit var viewModelFactory : ViewModelProvider.Factory
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    val viewModel : SearchViewModel by viewModels {
+    val viewModel: SearchViewModel by viewModels {
         viewModelFactory
     }
 
@@ -42,7 +42,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun observeKeyword() {
-        viewModel.keyword.observe(this){
+        viewModel.keyword.observe(this) {
             viewModel.insertRecentSearchTermToAppDatabase()
             search()
         }

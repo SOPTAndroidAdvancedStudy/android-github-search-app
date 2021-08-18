@@ -24,13 +24,13 @@ data class Repo(
     val owner: Owner,
     @field:SerializedName("stargazers_count")
     val starts: Int
-){
+) {
 
     data class Owner(
         @field:SerializedName("login")
-        val login : String,
+        val login: String,
         @field:SerializedName("url")
-        val url : String?
+        val url: String?
     )
 
     companion object {

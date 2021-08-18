@@ -9,12 +9,12 @@ import com.siba.searchmvvmpractice.domain.DomainUsers
 data class DatabaseGithubUserInfo constructor(
     @PrimaryKey
     @ColumnInfo(name = "login")
-    val login : String,
+    val login: String,
     @ColumnInfo(name = "url")
-    val url : String
+    val url: String
 )
 
-fun List<DatabaseGithubUserInfo>.asDomainUsers() : List<DomainUsers>{
+fun List<DatabaseGithubUserInfo>.asDomainUsers(): List<DomainUsers> {
     return map {
         DomainUsers(
             login = it.login,

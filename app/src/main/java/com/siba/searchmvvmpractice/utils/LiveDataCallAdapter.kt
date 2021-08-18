@@ -16,15 +16,15 @@ import java.util.concurrent.atomic.AtomicBoolean
  * 어떻게 쓰는지를 우리 지금 있는거에서 변경한번 해봐야 할 거 같다.
  */
 class LiveDataCallAdapter<R>(private val responseType: Type) :
-    CallAdapter<R, LiveData<ApiResponse<R>>>{
+    CallAdapter<R, LiveData<ApiResponse<R>>> {
     override fun responseType(): Type = responseType
 
     override fun adapt(call: Call<R>): LiveData<ApiResponse<R>> {
-        return object : LiveData<ApiResponse<R>>(){
+        return object : LiveData<ApiResponse<R>>() {
             private var started = AtomicBoolean(false)
             override fun onActive() {
                 super.onActive()
-                if(started.compareAndSet(false,true)) {
+                if (started.compareAndSet(false, true)) {
                     call.enqueue(object : Callback<R> {
                         override fun onResponse(call: Call<R>, response: Response<R>) {
                             postValue(ApiResponse.create(response))
@@ -38,6 +38,5 @@ class LiveDataCallAdapter<R>(private val responseType: Type) :
             }
         }
     }
-
 
 }

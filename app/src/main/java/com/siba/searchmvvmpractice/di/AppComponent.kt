@@ -16,14 +16,14 @@ interface AppComponent {
     @Component.Builder
     interface Builder {
         @BindsInstance
-        fun application(application : Application) : Builder
+        fun application(application: Application): Builder
 
-        fun build() : AppComponent
+        fun build(): AppComponent
     }
 
-    fun inject(mainApplication : MainApplication)
+    fun inject(mainApplication: MainApplication)
 
     fun inject(searchActivity: SearchActivity)
 
-    fun fragmentComponent() : FragmentComponent.Factory
+    fun fragmentComponent(): FragmentComponent.Factory
 }

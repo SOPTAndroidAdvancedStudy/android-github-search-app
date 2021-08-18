@@ -1,6 +1,6 @@
 package com.siba.searchmvvmpractice.vo
 
-enum class Status{
+enum class Status {
     SUCCESS,
     ERROR,
     LOADING
