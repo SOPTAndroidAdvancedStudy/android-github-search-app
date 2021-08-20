@@ -14,19 +14,34 @@ import com.siba.searchmvvmpractice.vo.Resource
 /**
  * A generic class that can provide a resource backed by both the sqlite database and network.
  *
- * SSong-develop
- * 네트워킹으로 데이터를 가져오거나 , Local에서 데이터를 가져올 떄 여러 상황이 있다.
- * 대표적으로 뭐 Success , Loading , Fail 이렇게 나누기도 하는데
- * 그 경우 처리하는 여러가지 방법이 존재하는 데 구글에서 제안한 방법중에 하나이다.
- * 코드를 차근차근히 살펴보면서 어떤 의미를 가지는 녀석인지 알아보면 좋을거 같다.
+ * 결과를 담아 놓는 MediatorLiveData인데 어떤 결과인가???
  *
+ * ApiResponse Wrapper 클래스를 통해서 NoContent인 경우의 제어를 해줬다
+ *
+ * 그 결과로 받은 데이터는 User에게 보여지기 전까지의 상태가 있을 것이고 그것을 나타내는 것이 Resource Wrapper 클래스이다.
+ *
+ * 결과적으로 Resource Wrapper클래스의 형태로 사용자들에게 보여주도록 한다.
+ *
+ * ResultType과 RequestType이 존재 , 생성자로 appExecutor를 받는다.(Dagger를 통해 Inject 받는다)
  */
 abstract class NetworkBoundResource<ResultType, RequestType>
 @MainThread constructor(private val appExecutors: AppExecutors) {
-
+    /**
+     * 결과를 받아 놓을 MediatorLiveData
+     *
+     * 결과라는 건 어떤 결과를 얘기하는 것일까????
+     *
+     * 이 NetworkBoundResource에서 결과란, Resource Wrapper class 로 wrapping 되어 오는 network되어 오는 ResultType을 받아낸다.
+     *
+     * 이때 network에는 localDatabase 또한 포함이다.
+     *
+     * shouldFetch 메서드를 통해 Networking 작업을 할지 안할지를 제어한다.
+     *
+     */
     private val result = MediatorLiveData<Resource<ResultType>>()
 
     init {
+        // Resource
         result.value = Resource.loading(null)
         @Suppress("LeakingThis")
         val dbSource = loadFromDb()

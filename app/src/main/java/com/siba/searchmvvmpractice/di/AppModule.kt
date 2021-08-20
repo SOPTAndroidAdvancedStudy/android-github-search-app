@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.room.Room
 import com.siba.searchmvvmpractice.api.GithubService
 import com.siba.searchmvvmpractice.local.dao.RepoDao
-import com.siba.searchmvvmpractice.local.dao.SearchDao
 import com.siba.searchmvvmpractice.local.dao.UserDao
 import com.siba.searchmvvmpractice.local.database.GithubDb
 import com.siba.searchmvvmpractice.utils.LiveDataCallAdapterFactory
@@ -43,8 +42,4 @@ class AppModule {
     @Singleton
     @Provides
     fun provideRepoDao(db: GithubDb): RepoDao = db.repoDao
-
-    @Singleton
-    @Provides
-    fun provideSearchDao(db: GithubDb): SearchDao = db.searchDao
 }

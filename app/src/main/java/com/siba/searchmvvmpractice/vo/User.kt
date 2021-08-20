@@ -1,7 +1,9 @@
 package com.siba.searchmvvmpractice.vo
 
+import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 
+@Entity(primaryKeys = ["login"])
 data class User(
     @field:SerializedName("login")
     val login: String,
