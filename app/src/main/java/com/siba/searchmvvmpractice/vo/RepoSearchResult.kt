@@ -2,7 +2,7 @@ package com.siba.searchmvvmpractice.vo
 
 import androidx.room.Entity
 import androidx.room.TypeConverters
-import com.siba.searchmvvmpractice.local.GithubTypeConverters
+import com.siba.searchmvvmpractice.db.GithubTypeConverters
 
 @Entity(primaryKeys = ["query"])
 @TypeConverters(GithubTypeConverters::class)

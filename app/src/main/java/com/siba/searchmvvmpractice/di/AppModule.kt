@@ -3,9 +3,9 @@ package com.siba.searchmvvmpractice.di
 import android.app.Application
 import androidx.room.Room
 import com.siba.searchmvvmpractice.api.GithubService
-import com.siba.searchmvvmpractice.local.dao.RepoDao
-import com.siba.searchmvvmpractice.local.dao.UserDao
-import com.siba.searchmvvmpractice.local.database.GithubDb
+import com.siba.searchmvvmpractice.db.GithubDb
+import com.siba.searchmvvmpractice.db.RepoDao
+import com.siba.searchmvvmpractice.db.UserDao
 import com.siba.searchmvvmpractice.utils.LiveDataCallAdapterFactory
 import dagger.Module
 import dagger.Provides

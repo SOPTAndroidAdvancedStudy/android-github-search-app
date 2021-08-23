@@ -7,6 +7,9 @@ import java.util.regex.Pattern
 /**
  * Common class used by API response
  * @param <T> the type of the response object
+ *
+ * TODO : SSong-develop 왜 ApiResponse를 companion object를 사용해서 만들었을까?
+ *
  */
 @Suppress("unused")
 sealed class ApiResponse<T> {

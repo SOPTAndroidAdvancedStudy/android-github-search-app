@@ -3,7 +3,7 @@ package com.siba.searchmvvmpractice.repository
 import androidx.lifecycle.LiveData
 import com.siba.searchmvvmpractice.api.GithubService
 import com.siba.searchmvvmpractice.application.AppExecutors
-import com.siba.searchmvvmpractice.local.dao.UserDao
+import com.siba.searchmvvmpractice.db.UserDao
 import com.siba.searchmvvmpractice.remote.ApiResponse
 import com.siba.searchmvvmpractice.vo.Resource
 import com.siba.searchmvvmpractice.vo.User

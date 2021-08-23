@@ -1,4 +1,4 @@
-package com.siba.searchmvvmpractice.local.dao
+package com.siba.searchmvvmpractice.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

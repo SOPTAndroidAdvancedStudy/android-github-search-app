@@ -1,4 +1,4 @@
-package com.siba.searchmvvmpractice.local
+package com.siba.searchmvvmpractice.db
 
 import android.util.Log
 import androidx.room.TypeConverter

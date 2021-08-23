@@ -22,4 +22,11 @@ data class Contributor(
     val contributions: Int,
     @field:SerializedName("avatar_url")
     val avatarUrl: String?
-)
+) {
+
+    // does not show up in the response but set in post processing
+    lateinit var repoName : String
+
+    // does not show up in the response but set in post processing
+    lateinit var repoOwner : String
+}
