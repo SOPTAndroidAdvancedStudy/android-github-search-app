@@ -9,7 +9,6 @@ import java.util.concurrent.TimeUnit
  *
  * SSong-develop
  * : 데이터를 fetch를 할때 시간을 기록해둠으로써 연속으로 fetch를 하는 것을 방지하는 클래스
- *
  */
 class RateLimiter<in KEY>(timeout: Int, timeUnit: TimeUnit) {
     private val timestamps = ArrayMap<KEY, Long>() // 시간 기록 Map

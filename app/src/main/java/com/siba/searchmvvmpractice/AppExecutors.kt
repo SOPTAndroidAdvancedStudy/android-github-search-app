@@ -1,4 +1,4 @@
-package com.siba.searchmvvmpractice.application
+package com.siba.searchmvvmpractice
 
 import android.os.Handler
 import android.os.Looper

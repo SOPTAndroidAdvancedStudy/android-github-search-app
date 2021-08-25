@@ -4,7 +4,7 @@ import androidx.annotation.MainThread
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import com.siba.searchmvvmpractice.application.AppExecutors
+import com.siba.searchmvvmpractice.AppExecutors
 import com.siba.searchmvvmpractice.remote.ApiEmptyResponse
 import com.siba.searchmvvmpractice.remote.ApiErrorResponse
 import com.siba.searchmvvmpractice.remote.ApiResponse
